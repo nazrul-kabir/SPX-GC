@@ -16,7 +16,13 @@ html, body {
     font-size: 1.0em;
     box-sizing: border-box;
     font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    background-color: var(--darkGrey);
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+}
+
+body.dark-mode {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
 }
 
 *, *:before, *:after {
@@ -93,7 +99,7 @@ html, body {
 }
 
 .itemrow {
-    background-color: rgba(255,255,255,0.05);
+    background-color: var(--card-background-light);
     border-top: 2px solid transparent !important;
     border-right: 2px solid transparent !important;
     border-bottom: 2px solid transparent !important;
@@ -101,12 +107,23 @@ html, body {
     box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 8px;
     cursor: pointer;
     margin-bottom: 8px;
-    transition: border-left 0.3s, color 0.2s, background-color 0.2s, border-width 0.2s;
+    transition: border-left 0.3s, color 0.2s, background-color 0.2s, border-width 0.2s, box-shadow 0.2s;
+    color: var(--text-color-light);
+}
+
+body.dark-mode .itemrow {
+    background-color: var(--card-background-dark);
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 8px; /* Darker shadow for dark mode */
+    color: var(--text-color-dark);
 }
 
 .itemrow:hover {
-    background-color: rgba(153, 218, 255, 0.08);
+    background-color: rgba(153, 218, 255, 0.08); /* Consider a variable */
     border-width: 2px 2px 2px 15px;
+}
+
+body.dark-mode .itemrow:hover {
+    background-color: rgba(var(--brand-color), 0.2); /* Using brand color with alpha for hover */
 }
 
 .scroller::-webkit-scrollbar-track
@@ -145,18 +162,31 @@ ul {
 
 a:link,
 a:visited {
-    color: white;
+    color: var(--text-color-light);
     text-decoration: none;
+}
+
+body.dark-mode a:link,
+body.dark-mode a:visited {
+    color: var(--text-color-dark);
 }
 
 a:hover {
-    color: orange;
+    color: var(--secondary-accent-color-light);
     text-decoration: none;
 }
 
+body.dark-mode a:hover {
+    color: var(--secondary-accent-color-dark);
+}
+
 a:active {
-    color: orange;
+    color: var(--secondary-accent-color-light);
     text-decoration: none;
+}
+
+body.dark-mode a:active {
+    color: var(--secondary-accent-color-dark);
 }
 
 div {
@@ -169,8 +199,12 @@ h2{
     margin-bottom: 2px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgb(25, 134, 212);
+    color: rgb(25, 134, 212); /* Consider a CSS variable */
     font-family: "UI-Light", Arial, Helvetica, sans-serif;
+}
+
+body.dark-mode h2 {
+    color: var(--accent-color-dark); /* Using brand color for headings in dark mode */
 }
 
 h2:first-of-type{

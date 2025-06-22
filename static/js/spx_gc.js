@@ -2546,7 +2546,36 @@ function spxInit() {
     spx_system('CHECKCONNECTIONS');
     document.getElementById('itemList').style.opacity=1;
 
+    // Dark mode initialization
+    initializeDarkMode();
+
 } // end spxInit
+
+function initializeDarkMode() {
+    const darkModeToggle = document.getElementById('darkModeToggle'); // Assuming an ID for the toggle
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        if (darkModeToggle) darkModeToggle.checked = true;
+    } else {
+        // Optional: explicitly set light mode or remove dark-mode if it was somehow set
+        document.body.classList.remove('dark-mode');
+        if (darkModeToggle) darkModeToggle.checked = false;
+    }
+
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    }
+}
 
 function setProfile(profileName) {
     // FIXME: remove?

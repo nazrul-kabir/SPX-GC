@@ -3,13 +3,36 @@
   CSS file for (bg)colors. Must be loaded after spx_layout.css
 */
 
+:root {
+  --brand-color: #55bb4b;
+  --background-color-light: #414C5A;
+  --text-color-light: #ffffff;
+  --card-background-light: #485a6b;
+  --header-background-light: #272833;
+  --accent-color-light: #54af3c;
+  --secondary-accent-color-light: #e57010;
+
+  --background-color-dark: #1a1a1a;
+  --text-color-dark: #e0e0e0;
+  --card-background-dark: #2c2c2c;
+  --header-background-dark: #222222;
+  --accent-color-dark: var(--brand-color); /* #55bb4b */
+  --secondary-accent-color-dark: #ff8c00; /* A slightly brighter orange for dark mode */
+}
+
 .disabled {
     opacity: 0.2;
     cursor: not-allowed;
 }
 
 .bg_body {
-    background-color: #414C5A;
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+}
+
+body.dark-mode .bg_body {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
 }
 
 
@@ -17,74 +40,144 @@
     background-color: rgba(0, 0, 0, 0.2);
 }
 
+body.dark-mode .darkBg {
+    background-color: rgba(255, 255, 255, 0.1); /* Lighter transparent overlay for dark mode */
+}
+
 .bg_green {
-    background-color: #54af3c;
+    background-color: var(--accent-color-light);
+}
+
+body.dark-mode .bg_green {
+    background-color: var(--accent-color-dark);
 }
 
 .green {
     color: #5f9750;
 }
 
+body.dark-mode .green {
+    color: var(--accent-color-dark);
+}
+
 .bg_yellow {
     background-color: #e5c310;
 }
 
+body.dark-mode .bg_yellow {
+    background-color: #ffd700; /* Brighter yellow for dark mode */
+}
+
 .bg_orange {
-    background-color: #e57010;
+    background-color: var(--secondary-accent-color-light);
+}
+
+body.dark-mode .bg_orange {
+    background-color: var(--secondary-accent-color-dark);
 }
 
 .bg_blue {
     background-color: #375ea3;
 }
 
+body.dark-mode .bg_blue {
+    background-color: #4a7bcf; /* Brighter blue for dark mode */
+}
+
 .bg_red {
     background-color: #9c1a29;
+}
+
+body.dark-mode .bg_red {
+    background-color: #c0392b; /* Brighter red for dark mode */
 }
 
 .bg_black {
     background-color: #000000;
 }
 
+body.dark-mode .bg_black {
+    background-color: var(--background-color-dark); /* Use dark mode background */
+}
+
 .bg_white {
     background-color: #ffffff;
 }
 
+body.dark-mode .bg_white {
+    background-color: var(--card-background-dark); /* Use card background for elements that were white */
+}
+
 .bg_grey80 {
-    background-color: #272833;
+    background-color: var(--header-background-light);
+}
+
+body.dark-mode .bg_grey80 {
+    background-color: var(--header-background-dark);
 }
 
 .bg_grey {
-    background-color: #485a6b;
+    background-color: var(--card-background-light);
+}
+
+body.dark-mode .bg_grey {
+    background-color: var(--card-background-dark);
 }
 
 .bg_grey60 {
     background-color: #2f303e;
 }
 
+body.dark-mode .bg_grey60 {
+    background-color: #3a3a3a;
+}
+
 .bg_grey40 {
     background-color: #343D48;
 }
 
+body.dark-mode .bg_grey40 {
+    background-color: #444444;
+}
+
 .bg_grey15 {
     background-color: #656e7a;
-    /* #706e83; */
+}
+
+body.dark-mode .bg_grey15 {
+    background-color: #555555;
 }
 
 .bg_grey10 {
     background-color: #9aa4b1;
-    /* #706e83; */
+}
+
+body.dark-mode .bg_grey10 {
+    background-color: #777777;
 }
 
 .black{
     color: black;
 }
 
+body.dark-mode .black{
+    color: var(--text-color-dark); /* Ensure black text becomes light in dark mode */
+}
+
 .bg_darken{
     background-color: rgba(0,0,0,0.07);
 }
 
+body.dark-mode .bg_darken{
+    background-color: rgba(255,255,255,0.05); /* Lighter darken effect in dark mode */
+}
+
 .bg_lighten{
     background-color: rgba(255,255,255,0.05);
+}
+
+body.dark-mode .bg_lighten{
+    background-color: rgba(0,0,0,0.07); /* Darker lighten effect in dark mode */
 }
 
 .newVersionBubble {
@@ -96,8 +189,18 @@
     cursor: pointer;
     display: inline-block;
     margin-top: 5px;
+    color: white; /* Ensure text is white */
+}
+
+body.dark-mode .newVersionBubble {
+    background-color: var(--accent-color-dark);
+    color: var(--background-color-dark); /* Dark text on brand color background */
 }
 
 .fg_orange {
-    color: #e57010;
+    color: var(--secondary-accent-color-light);
+}
+
+body.dark-mode .fg_orange {
+    color: var(--secondary-accent-color-dark);
 }

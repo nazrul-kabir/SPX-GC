@@ -7,11 +7,17 @@
 html, body {
     margin: 0px;
     height: 100%;
-    color: white;
+    color: var(--text-color-light);
+    background-color: var(--background-color-light);
     /* font-size: 1.5vw; */
     font-size: clamp(1.0rem, 1.5vw, 2.0rem);
     box-sizing: border-box;
     font-family: "UI-Regular", Arial, Helvetica, sans-serif;
+}
+
+body.dark-mode {
+    color: var(--text-color-dark);
+    background-color: var(--background-color-dark);
 }
 
 *, *:before, *:after {
@@ -59,18 +65,31 @@ ul {
 
 a:link,
 a:visited {
-    color: white;
+    color: var(--text-color-light);
     text-decoration: none;
+}
+
+body.dark-mode a:link,
+body.dark-mode a:visited {
+    color: var(--text-color-dark);
 }
 
 a:hover {
-    color: orange;
+    color: var(--secondary-accent-color-light);
     text-decoration: none;
 }
 
+body.dark-mode a:hover {
+    color: var(--secondary-accent-color-dark);
+}
+
 a:active {
-    color: orange;
+    color: var(--secondary-accent-color-light);
     text-decoration: none;
+}
+
+body.dark-mode a:active {
+    color: var(--secondary-accent-color-dark);
 }
 
 div {
@@ -83,8 +102,12 @@ h2{
     margin-bottom: 2px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgb(25, 134, 212);
+    color: rgb(25, 134, 212); /* Consider a CSS variable if this blue is used elsewhere */
     font-family: "UI-Light", Arial, Helvetica, sans-serif;
+}
+
+body.dark-mode h2 {
+    color: var(--accent-color-dark); /* Using brand color for headings in dark mode */
 }
 
 h2:first-of-type{
@@ -363,7 +386,12 @@ div.curfolder{
 
 .header {
     padding: 0.5em 0.7em 0.0em 0.7em;
-    border: 0px solid pink;
+    border: 0px solid pink; /* For debugging, consider removing or making it conditional */
+    background-color: var(--header-background-light);
+}
+
+body.dark-mode .header {
+    background-color: var(--header-background-dark);
 }
 
 .headerRow {
@@ -505,15 +533,17 @@ div.curfolder{
 
 
 
-.itemlist  
-    {
-        background-color: #2A3641;
-        /* background-image: url('/media/images/rundown_graphic.png');
-        background-size: 100%;
-        background-repeat: no-repeat;
-        background-position-y: 100%; */
-    }
+.itemlist {
+    background-color: var(--background-color-light);
+    /* background-image: url('/media/images/rundown_graphic.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position-y: 100%; */
+}
 
+body.dark-mode .itemlist {
+    background-color: var(--background-color-dark);
+}
 
 .truncate{
     margin-top: 0.2em;
@@ -876,11 +906,15 @@ div.curfolder{
 
 .footer {
     height: 32px;
-    border: 0px solid orange;
+    border: 0px solid orange; /* For debugging, consider removing or making it conditional */
     margin: 8px 10px 4px 10px;
     padding: 8px 10px;
+    background-color: var(--header-background-light); /* Assuming footer has similar bg to header */
   }
 
+body.dark-mode .footer {
+    background-color: var(--header-background-dark);
+}
 
 table.footerTable, td.footerTable, tr.footerTable, span.statusbar div.footerTable{
     padding: 0px;
@@ -891,13 +925,20 @@ table.footerTable, td.footerTable, tr.footerTable, span.statusbar div.footerTabl
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: var(--text-color-light); /* Ensuring text color is consistent */
+}
+
+body.dark-mode table.footerTable,
+body.dark-mode td.footerTable,
+body.dark-mode tr.footerTable,
+body.dark-mode span.statusbar div.footerTable {
+    color: var(--text-color-dark);
 }
 
 
-
-.statusbar
-    {
-    color:      #aaaaaa;
+.statusbar {
+    color:      var(--text-color-light);
+    opacity: 0.7; /* Slightly dim statusbar text for better hierarchy */
     font-family: Arial, Helvetica, sans-serif;
     font-size:  100%;
     padding:    3px 3px;
@@ -1015,7 +1056,7 @@ table.footerTable, td.footerTable, tr.footerTable, span.statusbar div.footerTabl
 
 
 .itemrow {
-    background-color: rgba(255,255,255,0.05);
+    background-color: var(--card-background-light);
     border-top: 2px solid transparent !important;
     border-right: 2px solid transparent !important;
     border-bottom: 2px solid transparent !important;
@@ -1023,17 +1064,28 @@ table.footerTable, td.footerTable, tr.footerTable, span.statusbar div.footerTabl
     box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 8px;
     cursor: pointer;
     margin-bottom: 8px;
-    transition: border-left 0.3s, color 0.2s, background-color 0.2s, border-width 0.2s;
+    transition: border-left 0.3s, color 0.2s, background-color 0.2s, border-width 0.2s, box-shadow 0.2s;
+    color: var(--text-color-light);
+}
+
+body.dark-mode .itemrow {
+    background-color: var(--card-background-dark);
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 8px; /* Darker shadow for dark mode */
+    color: var(--text-color-dark);
 }
 
 .itemrow:hover {
-    background-color: rgba(153, 218, 255, 0.1);
+    background-color: rgba(153, 218, 255, 0.1); /* Consider a variable for this hover color */
     /* border-width: 2px 2px 2px 15px; */
+}
+
+body.dark-mode .itemrow:hover {
+    background-color: rgba(var(--brand-color), 0.2); /* Using brand color with alpha for hover */
 }
 
 
 .inFocus {
-    border-top: 2px solid rgba(187, 164, 60, 0.746) !important;
+    border-top: 2px solid rgba(187, 164, 60, 0.746) !important; /* Consider variables for these focus colors */
     border-right: 2px solid rgba(141, 122, 13, 0.431) !important;
     border-bottom: 2px solid rgba(158, 120, 14, 0.527) !important;
     transition: background-color 0.2s, border-left 0.3s, box-shadow 0.6s;
@@ -1041,11 +1093,24 @@ table.footerTable, td.footerTable, tr.footerTable, span.statusbar div.footerTabl
     box-shadow: rgba(156, 119, 50, 0.3) 0px 0px 10px;
 }
 
+body.dark-mode .inFocus {
+    border-top: 2px solid var(--accent-color-dark) !important;
+    border-right: 2px solid var(--accent-color-dark) !important;
+    border-bottom: 2px solid var(--accent-color-dark) !important;
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0px 0px 12px rgba(var(--brand-color), 0.5);
+}
+
 .inFocus:hover {
     transition: background-color 0.2s, border-left 0.3s;
     background-color: rgba(0, 0, 0, 0.1);
-    box-shadow: rgba(218, 112, 13, 0.657) 0px 0px 10px;
+    box-shadow: rgba(218, 112, 13, 0.657) 0px 0px 10px; /* Consider a variable */
     /* border-width: 2px 2px 2px 15px; */
+}
+
+body.dark-mode .inFocus:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0px 0px 15px rgba(var(--brand-color), 0.7);
 }
 
 #messageSlider {
