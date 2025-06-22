@@ -1,65 +1,69 @@
 
 /* inspired by https://codepen.io/wildbeard/pen/eZZPZr */
 
-
+/* Using CSS variables defined in spx_colors.css */
 
 input[type="radio"] {
   display: none;
 }
-input[type="radio"]:checked + label span { transform: scale(1.25); }
+input[type="radio"]:checked + label span {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 2px var(--background-dark), 0 0 0 4px var(--brand-primary); /* Outline effect */
+}
 
-input[type="radio"]:checked + label .gra { border: 2px solid #ffffff;}
-input[type="radio"]:checked + label .red { border: 2px solid #ffffff;}
-input[type="radio"]:checked + label .ora { border: 2px solid #ffffff;}
-input[type="radio"]:checked + label .gre { border: 2px solid #ffffff;}
-input[type="radio"]:checked + label .blu { border: 2px solid #ffffff;}
-input[type="radio"]:checked + label .pin { border: 2px solid #ffffff;}
-input[type="radio"]:checked + label .vio { border: 2px solid #ffffff;}
-input[type="radio"]:checked + label .bla { border: 2px solid #ffffff;}
+/* Removed specific border color changes on check, relying on box-shadow for feedback */
 
 label {
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
+  width: 22px; /* Slightly larger */
+  height: 22px; /* Slightly larger */
+  margin-right: 8px; /* Adjusted margin */
   cursor: pointer;
+  border-radius: 50%; /* Make labels circular */
+  transition: transform 0.2s ease-in-out;
 }
-label:hover span {
-  /* transform: scale(1.25); */
+label:hover {
+  transform: scale(1.1); /* Subtle hover scale */
 }
 label span {
   display: block;
   width: 100%;
   height: 100%;
-  transition: transform .2s ease-in-out;
+  border-radius: 50%; /* Make spans circular */
+  transition: transform .2s ease-in-out, box-shadow .2s ease-in-out;
+  border: 1px solid var(--border-color); /* Add a subtle border */
 }
 
-/* grey, red, orange, green, blue, pink, violet, black */
-label span.gra {  background: #7a7a7a;}
-label span.red {  background: #DB2828;}
-label span.ora {  background: #F2711C;}
-label span.gre {  background: #21BA45;}
-label span.blu {  background: #2185D0;}
-label span.pin {  background: #E03997;}
-label span.vio {  background: #8840FF;}
-label span.bla {  background: #000000;}
+/* Mapped to new color palette variables where appropriate */
+/* Colors for radio button labels */
+label span.gra {  background: var(--neutral-3); } /* Grey */
+label span.red {  background: var(--accent-error); } /* Red */
+label span.ora {  background: #F2711C; } /* Orange - kept specific orange for now, could map to accent-warning if suitable */
+label span.gre {  background: var(--brand-primary); } /* Green (Brand) */
+label span.blu {  background: #2185D0; } /* Blue - kept specific blue, could be a new accent */
+label span.pin {  background: #E03997; } /* Pink - kept specific pink */
+label span.vio {  background: #8840FF; } /* Violet - kept specific violet */
+label span.bla {  background: #000000; } /* Black */
 
-.row_accent0 {border-left: 10px solid #696969; }
-.row_accent1 {border-left: 10px solid rgb(114, 38, 38); }
-.row_accent2 {border-left: 10px solid rgb(117, 70, 38); }
-.row_accent3 {border-left: 10px solid rgb(42, 107, 57); }
-.row_accent4 {border-left: 10px solid rgb(41, 87, 122); }
-.row_accent5 {border-left: 10px solid rgb(124, 57, 95); }
-.row_accent6 {border-left: 10px solid rgb(91, 67, 129); }
-.row_accent7 {border-left: 10px solid #181818; }
-.row_accentExtras {border-left: 10px solid #acacac; }
 
-.accent_{
-  background-color: rgba(255,255,255,0.05);
-  border: 0px solid yellow;
+/* Row accents using new palette */
+.row_accent0 { border-left: 8px solid var(--neutral-3); } /* Grey */
+.row_accent1 { border-left: 8px solid var(--accent-error); } /* Red */
+.row_accent2 { border-left: 8px solid #F2711C; } /* Orange */
+.row_accent3 { border-left: 8px solid var(--brand-primary); } /* Green (Brand) */
+.row_accent4 { border-left: 8px solid #2185D0; } /* Blue */
+.row_accent5 { border-left: 8px solid #E03997; } /* Pink */
+.row_accent6 { border-left: 8px solid #8840FF; } /* Violet */
+.row_accent7 { border-left: 8px solid var(--neutral-1); } /* Darker Grey/Black */
+.row_accentExtras { border-left: 8px solid var(--text-secondary); } /* Light Grey/Secondary Text */
+
+.accent_ { /* General accent style, now uses variables */
+  background-color: var(--neutral-1); /* Darker neutral background */
+  border: 1px solid var(--border-color); /* Standard border */
   width:100%;
-  padding:10px;
+  padding:12px; /* Adjusted padding */
   margin-bottom:15px;
-  border-left: 12px solid white;
-  box-shadow: rgba(0, 0, 0, 0.7) 0px 0px 10px;
+  border-left: 8px solid var(--brand-primary); /* Brand color for main accent line */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Softer shadow */
+  border-radius: 4px; /* Add some rounding */
 }

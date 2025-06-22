@@ -1,14 +1,19 @@
-/* simple tree */
+/* simple tree - Modernized with CSS variables */
 
-body{
-  font-family: Arial, Helvetica, sans-serif;
-}
+/* Assuming this body style is specific to a tree view page, otherwise remove */
+/* body {
+  font-family: "UI-Regular", Arial, Helvetica, sans-serif;
+  background-color: var(--background-dark);
+  color: var(--text-primary);
+} */
 
 .simple-tree {
   user-select: none;
   -moz-user-select: none;
+  font-size: 0.9em; /* Base font size for tree */
+  color: var(--text-primary); /* Ensure tree text uses primary color */
 }
-.simple-tree>details>summary {
+.simple-tree>details>summary { /* Hide top-level summary if it's just a container */
   display: none;
 }
 .simple-tree a,
@@ -16,96 +21,123 @@ body{
   display: block;
   width: fit-content;
   width: -moz-fit-content;
-  border: solid 1px transparent;
-  padding: 0 2px;
+  border: 1px solid transparent; /* Subtle border for focus/hover indication */
+  padding: 0.3em 0.5em; /* Consistent padding */
   outline: none;
   cursor: pointer;
+  color: var(--text-secondary); /* Default text color for items */
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  border-radius: 3px; /* Slight rounding */
 }
 .simple-tree a {
   text-decoration: none;
-  color: inherit;
+  color: var(--brand-primary); /* Links within tree use brand color */
 }
-.simple-tree ::-webkit-details-marker {
+.simple-tree a:hover {
+  color: var(--brand-primary-darker);
+  text-decoration: underline;
+}
+.simple-tree ::-webkit-details-marker { /* Hide default disclosure triangle */
   display: none;
 }
 .simple-tree summary {
-  list-style-type: none;
-  background-color: #eee;
-  outline: none;
+  list-style-type: none; /* Remove default list style */
+  background-color: transparent; /* Transparent background by default */
 }
-.simple-tree.dark summary {
-  background-color: #444;
+.simple-tree summary:hover {
+  background-color: var(--neutral-2); /* Subtle hover for summary */
+  color: var(--text-primary);
 }
-.simple-tree details>:not(details),
+/* .simple-tree.dark summary - Dark theme is now default, remove specific .dark class if not needed for other variations */
+/* background-color: var(--neutral-2); */
+
+.simple-tree details>:not(details), /* Child items */
 .simple-tree details {
   position: relative;
 }
-.simple-tree details :not(summary) {
-  margin-left: 20px;
+.simple-tree details :not(summary) { /* Indentation for nested items */
+  margin-left: 22px; /* Consistent indentation */
 }
-.simple-tree.nodots details :not(summary) {
-  margin-left: 12px;
-}
-.simple-tree details::before,
-.simple-tree details>:not(details)::before {
-  content: '';
-  width: 10px;
-  display: block;
-  position: absolute;
-}
-.simple-tree details::before,
-.simple-tree details>:not(details)::before {
-  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 2 2" xmlns="http://www.w3.org/2000/svg"><g><rect x="0" y="0" width="1" height="1"/></g></svg>') left top / 2px 2px;
-}
-.simple-tree.dark details::before,
-.simple-tree.dark details>:not(summary)::before {
-  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 2 2" xmlns="http://www.w3.org/2000/svg"><g><rect x="0" y="0" width="1" height="1" fill="white"/></g></svg>');
-}
-.simple-tree.nodots details::before,
-.simple-tree.nodots details>:not(summary)::before {
-  background-image: none;
-}
-.simple-tree details::before {
-  top: 0;
-  height: 100%;
-  background-repeat: repeat-y;
-  left: 5px;
-  z-index: -1;
-}
-.simple-tree details>:not(details)::before {
-  top: 8px;
-  height: calc(100% - 8px);
-  background-repeat: repeat-x;
-  left: -15px;
-}
-.simple-tree details>summary::before {
-  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><g><rect x="0" y="0" width="12" height="12" fill="white" stroke="gray" stroke-width="1"/><line x1="3" y1="6" x2="9" y2="6" stroke="black" stroke-width="2"/><line x1="6" y1="3" x2="6" y2="9" stroke="black" stroke-width="2"/></g></svg>') center center / 12px 12px no-repeat;
-  left: -22px;
-  top: 2px;
-  width: 16px;
-  height: 16px;
-}
-.simple-tree details[open]>summary::before {
-  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><title/><g><rect x="0" y="0" width="12" height="12" fill="white" stroke="gray" stroke-width="1"/><line x1="3" y1="6" x2="9" y2="6" stroke="black" stroke-width="2"/></g></svg>');
-}
-/* async tree */
-.async-tree details[open][data-loaded=false] {
-  pointer-events: none;
-}
-.async-tree details[open][data-loaded=false]>summary::before {
-  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><g><animateTransform attributeName="transform" type="rotate" from="0 32 32" to="360 32 32" dur="1s" repeatCount="indefinite"/><circle cx="32" cy="32" r="32" fill="whitesmoke"/><path d="M 62 32 A 30 30 0 0 0 32 2" style="stroke: black; stroke-width:6; fill:none;"/></g></svg>');
-}
-.async-tree.black details[open][data-loaded=false]>summary::before {
-  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><g><animateTransform attributeName="transform" type="rotate" from="0 32 32" to="360 32 32" dur="1s" repeatCount="indefinite"/><circle cx="32" cy="32" r="32" fill="whitesmoke"/><path d="M 62 32 A 30 30 0 0 0 32 2" style="stroke: white; stroke-width:6; fill:none;"/></g></svg>');
-}
-/* select tree */
-.select-tree .selected {
-  background-color: #beebff;
-  border-color: #99defd;
-  z-index: 1;
+.simple-tree.nodots details :not(summary) { /* Indentation for no-dots version */
+  margin-left: 15px;
 }
 
-.select-tree.dark .selected {
-  background-color: #3a484e;
-  border-color: #99defd;
+/* Lines for tree structure - using borders for a cleaner look */
+.simple-tree details::before, /* Vertical line connecting children */
+.simple-tree details>:not(details)::before { /* Horizontal line to child */
+  content: '';
+  position: absolute;
+  background-color: var(--border-color); /* Use border color for lines */
 }
+/* .simple-tree.dark - Lines should use var(--border-color) from the dark theme */
+
+.simple-tree.nodots details::before,
+.simple-tree.nodots details>:not(summary)::before {
+  background-image: none; /* Hide lines if .nodots class is present */
+  background-color: transparent;
+}
+
+.simple-tree details::before { /* Vertical line */
+  top: 1.2em; /* Start below summary text */
+  bottom: 0.5em; /* End above last child's connector */
+  left: 8px; /* Position of the vertical line */
+  width: 1px;
+  z-index: -1; /* Behind content */
+}
+.simple-tree details>:not(details)::before { /* Horizontal line */
+  top: 0.9em; /* Align with middle of summary text */
+  left: -14px; /* From child back to parent line */
+  width: 14px; /* Length of horizontal line */
+  height: 1px;
+}
+
+/* Custom disclosure triangle using ::before on summary */
+.simple-tree details>summary::before {
+  content: "\25B6"; /* Right-pointing triangle */
+  display: inline-block;
+  width: 1em; /* Space for the icon */
+  margin-left: -18px; /* Position before text */
+  margin-right: 8px; /* Space after icon */
+  color: var(--text-secondary);
+  transition: transform 0.2s ease-in-out;
+  transform-origin: center;
+}
+.simple-tree details[open]>summary::before {
+  transform: rotate(90deg); /* Rotate when open */
+}
+
+/* Async tree loading indicator - using a simpler spinner */
+.async-tree details[open][data-loaded=false] {
+  pointer-events: none; /* Disable interaction while loading */
+}
+.async-tree details[open][data-loaded=false]>summary::before {
+  content: ''; /* Clear default triangle */
+  border: 2px solid var(--neutral-3); /* Light grey border for spinner */
+  border-top-color: var(--brand-primary); /* Brand color for spinner active part */
+  border-radius: 50%;
+  width: 10px; /* Spinner size */
+  height: 10px;
+  animation: treeSpinner 0.8s linear infinite;
+  display: inline-block;
+  margin-left: -18px;
+  margin-right: 8px;
+  vertical-align: middle; /* Align spinner with text */
+}
+
+@keyframes treeSpinner {
+  to { transform: rotate(360deg); }
+}
+
+/* Select tree - styling for selected items */
+.select-tree .selected > summary, /* Target summary of selected details */
+.select-tree a.selected { /* Target selected anchor */
+  background-color: var(--brand-primary-darker); /* Use darker brand for selection */
+  border-color: var(--brand-primary);
+  color: var(--text-primary); /* Ensure text is readable */
+  z-index: 1;
+}
+.select-tree .selected > summary::before {
+  color: var(--text-primary); /* Make triangle visible on selection */
+}
+
+/* .select-tree.dark - Dark theme is default, .dark variant for selection not needed if colors are good */

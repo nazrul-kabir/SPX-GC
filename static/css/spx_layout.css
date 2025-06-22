@@ -3,15 +3,14 @@
   CSS file for basic stuff. Must be loaded first.
 */
 
-
 html, body {
     margin: 0px;
     height: 100%;
-    color: white;
-    /* font-size: 1.5vw; */
-    font-size: clamp(1.0rem, 1.5vw, 2.0rem);
+    color: var(--text-primary); /* Updated to use CSS variable */
+    font-size: clamp(1.0rem, 1.5vw, 2.0rem); /* Keep existing responsive font size */
     box-sizing: border-box;
-    font-family: "UI-Regular", Arial, Helvetica, sans-serif;
+    font-family: "UI-Regular", Arial, Helvetica, sans-serif; /* Keep existing font family */
+    background-color: var(--background-dark); /* Set global background */
 }
 
 *, *:before, *:after {
@@ -19,21 +18,18 @@ html, body {
     padding: 0;
     user-select: none;
     box-sizing: inherit;
-    }
-
+}
 
 .HIDE{
-    /* WHILE DEBUGGING unhide OBJECTS with display:no-none ++++++++++++++++++++++++++ */
-    display     :      none; /*change this to no-none to see debug data in editors */
-    border      :      2px dashed rgb(0, 248, 0);
-    padding     :      5px;
-    margin      :      5px;
-    background-color: rgba(173, 76, 11, 0.246);
-    /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  */
+    display: none;
+    border: 2px dashed var(--brand-primary); /* Use brand color for debug */
+    padding: 5px;
+    margin: 5px;
+    background-color: rgba(85, 187, 75, 0.1); /* Light brand color for debug bg */
 }
 
 .inlineHelp:hover {
-    color: orange;
+    color: var(--accent-warning); /* Use warning accent for help hover */
     cursor: help;
 }
     
@@ -43,33 +39,28 @@ html, body {
     border-radius: 0.7em;
     font-size: 0.7em;
     text-transform: uppercase;
-    background-color: rgba(3, 139, 37, 0.7);
-    color: rgb(255, 255, 255);
-    text-shadow: 1px 1px 1px rgb(0, 0, 0);
+    background-color: var(--brand-primary-darker); /* Use darker brand color */
+    color: var(--text-primary);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); /* Darker shadow for better contrast */
   }
 
 .footerRegister:hover {
-    background-color: rgba(0, 217, 54, 0.7);
-    color: rgb(255, 255, 255);
+    background-color: var(--brand-primary); /* Use main brand color on hover */
+    color: var(--text-primary);
   }
 
 ul {
     padding-left: 2em;
 }
 
-a:link,
-a:visited {
-    color: white;
+a, a:link, a:visited { /* Consolidate link styles */
+    color: var(--text-primary);
     text-decoration: none;
+    transition: color 0.2s ease-in-out; /* Smooth transition */
 }
 
-a:hover {
-    color: orange;
-    text-decoration: none;
-}
-
-a:active {
-    color: orange;
+a:hover, a:active { /* Consolidate hover/active styles */
+    color: var(--brand-primary); /* Use brand color for link hover */
     text-decoration: none;
 }
 
@@ -83,7 +74,7 @@ h2{
     margin-bottom: 2px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgb(25, 134, 212);
+    color: var(--brand-primary); /* Use brand color for H2 */
     font-family: "UI-Light", Arial, Helvetica, sans-serif;
 }
 
@@ -93,69 +84,56 @@ h2:first-of-type{
 
 .h2hr {
     margin: 6px 0px 10px 0px;
-    border: 1px solid rgba(0,0,0,0.0);
-    border-top: 2px solid rgba(0,0,0,0.2);
-    border-bottom: 1px solid rgba(106, 112, 119, 0.5);
+    border: 0; /* Remove default border */
+    border-top: 1px solid var(--border-color); /* Use CSS variable */
+    border-bottom: 1px solid var(--neutral-1); /* Subtle bottom border */
 }
 
-
 hr {
-    margin: 5px 0px 20px 0px;
-    border: 1px solid rgba(0,0,0,0.0);
-    border-top: 1px solid rgba(0,0,0,0.2);
-    border-bottom: 1px solid rgba(138, 138, 138, 0.2);
+    margin: 10px 0px 20px 0px; /* Adjusted margin */
+    border: 0;
+    border-top: 1px solid var(--border-color);
 }
 
 hr.menuDivider {
-    margin: 5px 0;
-    border: 1px solid rgba(0,0,0,0.0);
-    border-top: 2px solid rgba(0,0,0,0.5);
-    border-bottom: 1px solid rgba(161, 161, 161, 0.2);
+    margin: 8px 0; /* Adjusted margin */
+    border: 0;
+    border-top: 1px solid var(--neutral-1); /* Use neutral for menu dividers */
 }
-
 
 td {
     vertical-align: middle;
-    border: 0px solid yellow;
+    /* border: 0px solid yellow; */ /* Removed debug border */
 }
-
-
 
 iframe {
-    transform-origin:   top left;
-    background-color:   rgb(0, 0, 0);
-    border:             1px solid rgb(0, 0, 0);
-    /* removed in 1.1.0 -----
-    width:              1920px;
-    height:             1080px; */
-    overflow:           hidden;
+    transform-origin: top left;
+    background-color: #000000; /* Keep black for iframe bg */
+    border: 1px solid var(--border-color); /* Use variable for border */
+    overflow: hidden;
 }
 
-
 /* html elements above this line, custom classes alphabetized below */
-
 
 td.aright{
     justify-content: flex-end;
     text-align: right;
 }
 
-.beta
-    {
-    background-color: rgba(138, 113, 113, 0.822);
-    border-radius: 0px;
-    padding: 1px 8px;
+.beta { /* Style for beta tags, consider removing or updating if not modern */
+    background-color: var(--neutral-3);
+    border-radius: 3px; /* Slightly rounded corners */
+    padding: 2px 8px; /* Adjusted padding */
     font-family: "UI-Bold", Arial, Helvetica, sans-serif;
-    font-size: 0.85em;
-    color: rgb(48, 48, 48);
+    font-size: 0.8em; /* Adjusted size */
+    color: var(--text-secondary);
     margin-left: 0.25em;
     margin-right: 0.75em;
-    border-bottom: 2px solid rgb(128, 21, 7);
-    }
-
+    border-bottom: 2px solid var(--brand-primary-darker); /* Brand color accent */
+}
 
 .brd{
-    border: 2px dotted white;
+    border: 1px dashed var(--text-secondary); /* Use secondary text for dotted border */
     border-collapse: separate;
 }
 
@@ -166,21 +144,23 @@ td.aright{
 }
 
 .breadcrumbs{
-    color:  #B9BDC2;
+    color:  var(--text-secondary); /* Use secondary text for breadcrumbs */
     font-size: 0.9rem;
     text-transform: uppercase;
     font-family: "UI-Light", Arial, Helvetica, sans-serif;
 }
 
 .breadcrumbGear {
-    opacity: 0.3;
+    opacity: 0.6; /* Increased default opacity */
     margin: 0 0.5em;
-    font-size: 0.6em;
-    color:  #ffffff;
+    font-size: 0.7em; /* Adjusted size */
+    color:  var(--text-primary);
+    transition: opacity 0.2s ease-in-out; /* Smooth transition */
 }
 
 .breadcrumbGear:hover {
     opacity: 1.0;
+    color: var(--brand-primary); /* Brand color on hover */
     cursor: pointer;
 }
 
@@ -198,107 +178,105 @@ td.aright{
     width: fit-content;
     align-items: center;
     justify-content: center;
-    border: 0px solid yellow;
+    /* border: 0px solid yellow; */ /* Removed debug border */
 }
-
 
 .caption{
     font-size: 0.7em;
-    opacity: 0.6;
+    color: var(--text-secondary); /* Use secondary text for captions */
+    opacity: 0.8; /* Slightly more visible */
 }
-
 
 .caret-icon{
     font-size: 1.0rem;
-    color:  #237BBA;
+    color:  var(--brand-primary); /* Brand color for caret */
     margin: 0 0.5em !important;
 }
 
 .gcpluginbuttondiv {
     display: flex;
     align-items: center;
-    font-size: 0.6rem;
+    font-size: 0.7rem; /* Slightly larger font */
     margin-top: 1em;
-    padding: 0.6em 0.4em 0.6em 0.4em;
-    background-color: rgba(0,0,0,0.1);
-    border-top: 1px solid rgba(0,0,0,0.7) !important;
-    border-bottom: 1px solid rgba(255,255,255,0.3) !important;
+    padding: 0.6em 0.4em;
+    background-color: var(--neutral-1); /* Use neutral bg */
+    border-top: 1px solid var(--border-color) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    border-radius: 4px; /* Add some rounding */
 }
 
 .gcplugindescription {
-    font-size: 0.5;
-    color:  rgba(255,255,255,0.5);
+    font-size: 0.6em; /* Adjusted size */
+    color:  var(--text-secondary);
 }
-
 
 .center {
     text-align: center !important;
-    }
-
+}
 
 .centerColumn {
     margin: auto;
-    width: 70%;
+    width: 80%; /* Slightly wider for modern feel */
+    max-width: 1200px; /* Add max-width */
     height: 100%;
     overflow: auto;
-    border: 0px solid salmon;
-    }
+    /* border: 0px solid salmon; */ /* Removed debug border */
+}
     
 .helpid,
 .copyid {
     margin-left: 0.25em;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--neutral-1); /* Use neutral bg */
     padding: 0.3em 0.6em;
-    border-radius: 0.2em;
-    color:rgba(255, 255, 255, 0.4);
-    transition: all 0.2s linear ;
-    }
+    border-radius: 0.3em; /* Slightly more rounding */
+    color: var(--text-secondary);
+    transition: all 0.2s linear;
+}
 
 .copyid:hover {
-    background: rgba(0, 0, 0, 0.5);
-    color:rgb(255, 255, 255);
-    transition: all 0.2s linear ;
-    }
+    background: var(--neutral-2);
+    color: var(--text-primary);
+}
 
 .helpid:hover {
-    background: rgb(5, 45, 145);
-    color:rgb(255, 255, 255);
-    transition: all 0.2s linear ;
+    background: var(--brand-primary-darker); /* Brand color for help hover */
+    color: var(--text-primary);
     cursor: help;
-    }
+}
 
 .content {
     flex: 1 1;
     overflow: auto;
-    border: 0px solid red;
+    /* border: 0px solid red; */ /* Removed debug border */
+    padding: 1em; /* Add some padding to content areas */
 }
 
 .delim {
-    color:          rgba(53, 178, 250, 0.651);
+    color: var(--brand-primary); /* Brand color for delimiter */
     margin-right:   0.5em;
     margin-left:    0.5em;
 }
 
 .delim::before {
-    content:        "|";
+    content: "|";
 }
 
 .divider {
     display: block;
     font-family: "UI-Light", Arial, Helvetica, sans-serif;
     text-align: left;
-    font-size: 0.5em;
+    font-size: 0.6em; /* Adjusted size */
     text-transform: uppercase;
     margin-top: 1.5em;
     padding-bottom: 0.4em;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid var(--border-color); /* Use variable */
     margin-bottom: 0.5em;
-    opacity: 0.5;
+    opacity: 0.7; /* Slightly more visible */
+    color: var(--text-secondary); /* Use secondary text */
 }
 
 #logo {
-    /* width: 2em; *//*50px;*/
-    width: clamp(1.0rem, 2em, 2.0rem);
+    width: clamp(1.5rem, 2.5em, 2.5rem); /* Slightly larger logo */
     margin:0;
     opacity:1;
 }
@@ -307,63 +285,80 @@ td.aright{
     user-select: none;
     display: block;
     cursor: pointer;
+    padding: 0.3em 0; /* Add some padding */
+    transition: background-color 0.2s ease-in-out; /* Smooth transition */
+}
+
+.file:hover, .folder:hover {
+    background-color: var(--neutral-1); /* Hover effect */
 }
 
 .filebrowser {
     overflow: auto;
     font-size: 0.9em;
-    padding: 0.1em;
-    border: 0px solid purple;
-    padding: 0.7em;
-    /* background-color: rgba(0, 0, 0, 0.1); */
+    padding: 0.5em; /* Adjusted padding */
+    /* border: 0px solid purple; */ /* Removed debug border */
+    background-color: var(--neutral-1); /* Background for file browser */
     flex-grow: 1 !important;
     flex-shrink: 1 !important;
+    border-radius: 4px; /* Add rounding */
 }
 
 .selectedFile{
-    border-left: 3px solid orange;
-    border-right: 3px solid orange;
-    background-color: rgba(255, 166, 0, 0.157);
+    border-left: 3px solid var(--brand-primary); /* Brand color for selection */
+    border-right: 3px solid var(--brand-primary);
+    background-color: var(--brand-primary-darker); /* Darker brand for selected bg */
+    color: var(--text-primary); /* Ensure text is readable */
 }
 
 .filebrowser UL {
     padding: 0.2em;
+    list-style: none; /* Remove list bullets */
 }
 
 .filebrowser LI {
     font-size: 0.9em;
-    padding: 0.5em;
+    padding: 0.6em 0.5em; /* Adjusted padding */
     margin-left: 0px;
-    border-bottom: 1px solid #ffffff28;
+    border-bottom: 1px solid var(--border-color); /* Use variable */
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out; /* Smooth transition */
+}
+
+.filebrowser LI:last-child {
+    border-bottom: none; /* Remove border from last item */
 }
 
 .filebrowser_file, .filebrowser_folder, .filebrowser_up{
-    color: rgb(214, 214, 214);
+    color: var(--text-secondary); /* Use secondary text */
     display: block;
     cursor: pointer;
 }
 
 .filebrowser_file:hover, .filebrowser_folder:hover, .filebrowser_up:hover{
-    color: rgb(227, 239, 245);
-    background-color: #2c3136;
+    color: var(--text-primary);
+    background-color: var(--neutral-2); /* Use neutral for hover */
 }
 
 div.curfolder{
     padding: 0.5em 1em;
-    color: rgba(227, 239, 245, 0.589);
-    font-size: 0.6em;
-    border: 0px solid purple;
+    color: var(--text-secondary);
+    font-size: 0.7em; /* Adjusted size */
+    /* border: 0px solid purple; */ /* Removed debug border */
+    background-color: var(--neutral-2); /* Background for current folder display */
+    border-bottom: 1px solid var(--border-color); /* Add a separator */
 }
 
 .headlineArea {
-    border-top: 2px solid grey;
+    border-top: 2px solid var(--border-color); /* Use variable */
     vertical-align: top;
+    padding-top: 0.5em; /* Add some padding */
 }
 
-
 .header {
-    padding: 0.5em 0.7em 0.0em 0.7em;
-    border: 0px solid pink;
+    padding: 0.5em 0.7em; /* Adjusted padding */
+    /* border: 0px solid pink; */ /* Removed debug border */
+    background-color: var(--neutral-1); /* Header background */
+    border-bottom: 1px solid var(--border-color); /* Separator for header */
 }
 
 .headerRow {
@@ -372,148 +367,165 @@ div.curfolder{
     display: flex;
     flex-direction: row;
     align-items: center;
-    border: 0px dashed cornsilk;
+    /* border: 0px dashed cornsilk; */ /* Removed debug border */
 }
 
 .scrollingMenuArea {
     left:0.5em;
-    top: 1.8em;
+    top: 2.2em; /* Adjusted top position */
     overflow-y: auto;
-    max-height: 90vh;
+    max-height: 85vh; /* Adjusted max height */
     position: absolute;
-    background-color: hsla(235, 13%, 18%, 0.95);
+    background-color: var(--neutral-1); /* Use neutral bg with opacity */
     font-family: "UI-Light", Arial, Helvetica, sans-serif;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
+    border: 1px solid var(--border-color); /* Add border */
+    border-radius: 4px; /* Add rounding */
+    z-index: 1000; /* Ensure it's on top */
 }
-
 
 .dropdown {
     z-index:500;
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    position: relative; /* Needed for dropdown content positioning */
 }
 
 .dropdown-content {
-    z-index: 1;
+    z-index: 1001; /* Higher than scrollingMenuArea */
     display: none;
+    position: absolute; /* Position relative to parent */
+    top: 100%; /* Position below the dropdown trigger */
+    left: 0;
     padding: 0.5em;
-    padding: 1em;
-    line-height: 2em;
-    font-size: clamp(0.8rem, 0.8em, 2.0rem);
+    line-height: 1.8em; /* Adjusted line height */
+    font-size: clamp(0.8rem, 0.9em, 1.5rem); /* Adjusted font size */
     overflow-y: auto;
     height: fit-content;
+    min-width: 200px; /* Ensure a minimum width */
+    background-color: var(--neutral-2); /* Background for dropdown */
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
     transform-origin: top left;
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
-    overflow: auto;
-    border: 0px solid red;
 }
 
-
-.dropdown-content-right {
+.dropdown-content-right { /* This might need to be merged or re-evaluated with .dropdown-content */
     right: 0;
-    top: 2em;
-    z-index: 100;
+    left: auto; /* Override left from .dropdown-content if used together */
+    top: 100%; /* Adjusted top position */
+    z-index: 1001; /* Higher than scrollingMenuArea */
     display: none;
-    padding: 0.5em;
-    line-height: 2em;
-    font-size: 0.8em;
     position: absolute;
-    transform-origin: top left;
-    border: 0px solid green;
-    background-color: #272833;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 0.5em;
+    line-height: 1.8em;
+    font-size: 0.9em; /* Adjusted size */
+    background-color: var(--neutral-2); /* Use neutral bg */
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
     font-family: "UI-Light", Arial, Helvetica, sans-serif;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    transform-origin: top right; /* Adjust for right alignment */
 }
 
 .dropdown:hover .dropdown-content-right {
     display: block;
-    overflow: auto;
-    border: 0px solid red;
 }
 
 .dropdown-content a,
 .dropdown-content-right a {
     white-space: nowrap;
+    display: block; /* Make links take full width */
+    padding: 0.3em 0.5em; /* Add padding to links */
+    color: var(--text-primary);
+    transition: background-color 0.2s ease-in-out;
 }
 
+.dropdown-content a:hover,
+.dropdown-content-right a:hover {
+    background-color: var(--brand-primary); /* Brand color for hover */
+    color: var(--text-primary);
+}
+
+
 .tableheaderText {
-    color: rgb(25, 134, 212);
+    color: var(--brand-primary); /* Brand color for table headers */
     font-family: "UI-Light", Arial, Helvetica, sans-serif;
-    font-size: 0.7rem;
+    font-size: 0.8rem; /* Adjusted size */
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px; /* Adjusted spacing */
     font-weight: bold;
 }
 
 .tableheaderHelp {
-    color: rgb(25, 134, 212);
+    color: var(--brand-primary);
     font-family: "UI-Light", Arial, Helvetica, sans-serif;
     font-size: 0.8rem;
     text-transform: uppercase;
     font-weight: bold;
-    opacity: 0.5;
+    opacity: 0.7; /* Adjusted opacity */
+    transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .tableheaderHelp:hover {
-    color: rgb(250, 201, 96);
+    color: var(--accent-warning); /* Warning color for help hover */
     opacity: 1.0;
     cursor: help;
 }
 
-.tableheaderHelp2 {
-    color: rgb(186, 226, 255);
+.tableheaderHelp2 { /* Similar to tableheaderHelp, consolidate if possible */
+    color: var(--text-secondary);
     font-family: "UI-Light", Arial, Helvetica, sans-serif;
     font-size: 0.8rem;
     text-transform: uppercase;
     font-weight: bold;
-    opacity: 0.5;
+    opacity: 0.7;
+    transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .tableheaderHelp2:hover {
-    color: rgb(255, 185, 33);
+    color: var(--brand-primary); /* Brand color on hover */
     opacity: 1.0;
     cursor: pointer;
 }
-
 
 .hidden {
     display: none !important;
 }
 
-
 .home-icon {
-    font-size: 1.2em;
-    color: #B9BDC2;
+    font-size: 1.3em; /* Slightly larger */
+    color: var(--text-secondary);
     margin-left: 20px;
     margin-right: 5px;
+    transition: color 0.2s ease-in-out;
+}
+.home-icon:hover {
+    color: var(--brand-primary); /* Brand color on hover */
 }
 
 .instruction {
-    font-size:          0.6em;
-    color:              #a7abad;
-    line-height:        1.4em;
-    border-left:        1px solid #036a9e;
-    padding:            0.5em 0.2em 0.5em 1em;
-    margin-top:         0.5em;
-    margin-bottom:      0.5em;
-    background-color:   rgba(0, 0, 0, 0.2);
+    font-size: 0.7em; /* Adjusted size */
+    color: var(--text-secondary);
+    line-height: 1.5em; /* Adjusted line height */
+    border-left: 2px solid var(--brand-primary); /* Brand color for border */
+    padding: 0.6em 0.8em; /* Adjusted padding */
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    background-color: var(--neutral-1); /* Use neutral bg */
+    border-radius: 3px; /* Add rounding */
 }
 
-
-
-.itemlist  
-    {
-        background-color: #2A3641;
-        /* background-image: url('/media/images/rundown_graphic.png');
-        background-size: 100%;
-        background-repeat: no-repeat;
-        background-position-y: 100%; */
-    }
-
+.itemlist {
+    background-color: var(--neutral-1); /* Use neutral for item list background */
+    padding: 0.5em; /* Add some padding */
+    border-radius: 4px; /* Add rounding */
+}
 
 .truncate{
     margin-top: 0.2em;
@@ -526,336 +538,356 @@ div.curfolder{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    opacity: 0.5;
-  }
+    opacity: 0.8; /* Slightly more visible */
+    color: var(--text-secondary);
+}
 
-
-
-.left {
+.left { /* Consider renaming for clarity if it's a main panel */
     width: 60%;
     height: 100%;
-    float: left;
+    float: left; /* Consider flexbox for layout instead of floats */
     overflow: auto;
-    border: 0px solid salmon;
-    }
+    /* border: 0px solid salmon; */
+    padding-right: 0.5em; /* Add spacing if there's a right panel */
+}
 
-
-.l-icon {
+.l-icon { /* Generic icon class, make more specific if possible */
     margin-top: 0.7em;
-    }
+    color: var(--text-secondary);
+    transition: color 0.2s ease-in-out;
+}
 
 .l-icon:hover {
-    color: orange;
-    }
+    color: var(--brand-primary); /* Brand color on hover */
+}
 
-
-
-.message{
-    padding: 10px;
-    background-color: rgba(125, 226, 159, 0.363);
-    color: white;
+.message{ /* For success messages */
+    padding: 12px 15px; /* Adjusted padding */
+    background-color: var(--brand-primary-darker); /* Darker brand for success */
+    color: var(--text-primary);
     border-radius: 6px;
     text-align: center;
-    font-size: 0.7rem;
-    margin-bottom: 30px;
+    font-size: 0.8rem; /* Adjusted size */
+    margin-bottom: 20px; /* Adjusted margin */
+    border: 1px solid var(--brand-primary); /* Add border */
 }
 
-
-.messagerror{
-    padding: 10px;
-    background-color: rgba(221, 82, 27, 0.363);
-    color: white;
+.messagerror{ /* For error messages */
+    padding: 12px 15px;
+    background-color: var(--accent-error); /* Error accent */
+    color: var(--text-primary); /* Ensure text is readable on error bg */
     border-radius: 6px;
     text-align: center;
-    font-size: 0.7rem;
-    margin-bottom: 30px;
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+    border: 1px solid darken(var(--accent-error), 10%); /* Darker border for error */
 }
 
-
-.over {
-    background-color: pink !important;
+.over { /* Highlight for drag-over or similar, needs context */
+    background-color: var(--brand-primary-darker) !important; /* Use brand color */
+    outline: 2px dashed var(--brand-primary);
 }
 
+.pM { /* Generic padding class, try to avoid if possible */
+    padding: 10px;
+}
 
-.pM
-    {
-        padding: 10px;
-    }
+.playFalse { /* Style for play icon when not playing */
+    opacity: 0.5 !important; /* More visible than 0 */
+    color: var(--text-secondary); /* Secondary text color */
+}
 
-    
-.playFalse
-    {
-        /*FIXME: This is not super clever... See view-controller play icon logic...*/
-        opacity: 0 !important; 
-        color:green;
-    }
+.playTrue { /* Style for play icon when playing */
+    opacity: 1 !important;
+    color: var(--brand-primary); /* Brand color for active play */
+}
 
-
-.playTrue
-    {
-        /*FIXME: This is not super clever... See view-controller play icon logic...*/
-        opacity: 1 !important;
-        color:green;
-    }
-
-.playAuto
-    {
-        /*FIXME: This is not super clever... See view-controller play icon logic...*/
-        opacity: 1 !important;
-        color:green !important;
-        border-right: 3px solid green;
-    }
+.playAuto { /* Style for auto-play icon */
+    opacity: 1 !important;
+    color: var(--brand-primary) !important;
+    border-right: 3px solid var(--brand-primary); /* Keep brand color border */
+}
 
 .pluginButtonDiv {
-    /* added in 1.3.0 */
     min-width: 50%;
 }
 
-.renderer
-    {
-        background-image: url('/img/checker60.png'); /* bgimage for local preview */
-        background-size: 10vw;
-    }
+.renderer {
+    background-image: url('/img/checker60.png');
+    background-size: 30px 30px; /* Make checker pattern smaller */
+    border: 1px solid var(--border-color); /* Add border */
+}
 
-.registrationDiv {
+.registrationDiv { /* For registration call to action */
     display: block;
-    padding: 0.05em;
-    background-color: rgba(18, 82, 25, 0.604);
-    border-radius: 200px;
-    color: green;
-    border: 2px solid rgba(0, 128, 0, 0.317);
+    padding: 0.5em 1em; /* Adjusted padding */
+    background-color: var(--brand-primary);
+    border-radius: 20px; /* Keep rounded style */
+    color: var(--text-primary);
+    border: 2px solid var(--brand-primary-darker);
     text-align: center;
-    font-size: 0.8em;
+    font-size: 0.9em; /* Adjusted size */
     margin-top: 0.8em;
-    opacity: 0.7;
-    transition: all 0.3s ease-in-out;
+    opacity: 0.9; /* Slightly more prominent */
+    transition: all 0.2s ease-in-out; /* Smoother transition */
 }
 
 .registrationDiv:hover {
-    border: 2px solid orange;
-    background-color: rgba(12, 132, 6, 0.441);
-    transform: scale(0.98);
-    transition: all 0.3s ease-in-out;
+    border: 2px solid var(--brand-primary);
+    background-color: var(--brand-primary-darker);
+    transform: scale(1.02); /* Subtle scale effect */
     opacity: 1.0;
 }
 
-.right {
-    margin-left: 60%;
+.right { /* Consider renaming for clarity if it's a main panel */
+    margin-left: 60%; /* Assumes .left is 60% and floated */
     height: 100%;
     overflow: auto;
-    border: 0px solid blueviolet;
-    }
+    /* border: 0px solid blueviolet; */
+    padding-left: 0.5em; /* Add spacing if there's a left panel */
+}
 
-
-
-.rowhead {
-    margin: auto 1px auto 1px;
+.rowhead { /* For table row headers or similar */
+    margin: auto 1px;
     vertical-align: middle;
-    color: white;
-    font-family: "UI-Black", Arial, Helvetica, sans-serif;
-    font-size: 0.85em;
+    color: var(--text-primary);
+    font-family: "UI-Bold", Arial, Helvetica, sans-serif; /* Bolder font */
+    font-size: 0.9em; /* Adjusted size */
     line-height: 2em;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding: 5px 8px; /* Adjusted padding */
+    background-color: var(--neutral-2); /* Add a background */
 }
 
 .scroller {
     overflow: auto !important;
-    border: 0px dotted yellow;
+    /* border: 0px dotted yellow; */ /* Removed debug border */
 }
-
 
 .serverIndicator {
     cursor: pointer;
+    color: var(--text-secondary);
+    transition: color 0.2s ease-in-out;
 }
 
 .serverIndicator:hover {
-    color: orange;
+    color: var(--brand-primary); /* Brand color on hover */
 }
 
 .disabledServer {
     text-decoration: line-through;
-    opacity: 0.4;
-    color: black;
+    opacity: 0.5; /* More visible */
+    color: var(--text-secondary); /* Secondary text for disabled */
+}
+
+/* Modern Scrollbar Styles */
+.scroller::-webkit-scrollbar {
+    width: 12px; /* Slightly thinner */
+    background-color: var(--neutral-1); /* Match dark theme */
 }
 
 .scroller::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.0);
-    border-radius: 0px;
-    background-color: #414C5A;
-}
-
-.scroller::-webkit-scrollbar {
-    width: 14px;
-    background-color: #414C5A;
-    border: 0px solid yellow;
+    background-color: var(--neutral-1);
+    border-radius: 10px;
+     -webkit-box-shadow: none; /* Remove inner shadow */
 }
 
 .scroller::-webkit-scrollbar-thumb {
+    background-color: var(--neutral-3); /* Darker thumb */
     border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.0);
-    background-color: #677180;
-    padding: 10px;
+    border: 2px solid var(--neutral-1); /* Create a border effect */
+     -webkit-box-shadow: none;
 }
 
 .scroller::-webkit-scrollbar-thumb:hover {
-    background-color: #718cb4;
+    background-color: var(--brand-primary); /* Brand color on hover */
 }
 
-.serverbtn {
-        background-color: rgba(0, 0, 0, 0);
-        font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-        padding: 0.3em 0.8em;
-        border-radius: 0px;
-        font-size: 0.8em;
-        margin: 0px;
-        color: white;
-        cursor: default;
-    }
 
-.spacer {
-    /* empty span between UI controls, spacer ftype */
+.serverbtn { /* Buttons related to server status/actions */
+    background-color: transparent; /* Make transparent */
+    font-family: "UI-Regular", Arial, Helvetica, sans-serif;
+    padding: 0.4em 0.9em; /* Adjusted padding */
+    border-radius: 4px; /* Add rounding */
+    font-size: 0.85em; /* Adjusted size */
+    margin: 0px 2px; /* Add small margin */
+    color: var(--text-primary);
+    cursor: pointer; /* Make it a pointer */
+    border: 1px solid var(--border-color); /* Add subtle border */
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.serverbtn:hover {
+    background-color: var(--neutral-2);
+    border-color: var(--brand-primary); /* Brand color border on hover */
+}
+
+
+.spacer { /* For spacer elements, consider if still needed or use margin/padding */
     display: block; 
-    background-color: green;
+    background-color: transparent; /* Make spacer invisible */
     height: 1em;
 }
 
 .spxFlexContainer {
-    display: flex; /* flex or inline-flex */
+    display: flex;
     justify-content: center;
     align-content: stretch;
     padding: 0.0em;
-    border: 0px solid yellow;
+    /* border: 0px solid yellow; */
     margin: 0px;
-    gap: 2px;
+    gap: 5px; /* Increased gap slightly */
 }
 
 .spxFlexItem {
     flex: auto;
     white-space: nowrap;
-    padding: 0px 0px 0px 0px;
+    padding: 0px;
     margin: 0px;
 }
 
+/* Styles for spxMainPanel and its children need careful review for modernization */
+/* This section seems to define a table-based layout, which is not very modern. */
+/* Consider refactoring to flexbox or grid if significant changes are allowed. */
+/* For now, applying color variables and minor tweaks. */
+
 .spxMainPanel {
-    height: 55vw;
-    display: table;
+    height: auto; /* Allow content to define height */
+    min-height: 55vw; /* Keep min-height if necessary */
+    display: flex; /* Changed to flex for better alignment options */
+    flex-direction: column;
     width: 100%;
-    max-width: 2000px;
+    max-width: 1600px; /* Increased max-width */
     text-align: center;
-    border: 0px solid yellow;
-    border-collapse: separate;
-    border-spacing: 2px;
+    /* border: 0px solid yellow; */
+    border-collapse: separate; /* Keep for now if table structure remains */
+    border-spacing: 5px; /* Increased spacing */
     margin: auto;
+    background-color: var(--neutral-1); /* Add a base background */
+    padding: 1em; /* Add padding */
+    border-radius: 8px; /* Add rounding */
 }
 
-.spxTopRow {
-    display: table-row;
-    height: 4em;
-    color: white;
-    border: 0px solid red !important;
+.spxTopRow { /* If keeping table display, otherwise adapt for flex */
+    display: table-row; /* Or flex item */
+    height: auto; /* Auto height */
+    padding: 0.5em 0; /* Add padding */
+    color: var(--text-primary);
+    /* border: 0px solid red !important; */
     font-family: "UI-Regular", Arial, Helvetica, sans-serif;
+    border-bottom: 1px solid var(--border-color); /* Add separator */
 }
 
-.spxBottomRow {
-    display: table-row;
-    height: 12.5em;
-    /* background: rgb(9, 36, 9); */
-    color: beige;
+.spxBottomRow { /* If keeping table display, otherwise adapt for flex */
+    display: table-row; /* Or flex item */
+    height: auto;
+    padding: 1em 0; /* Add padding */
+    color: var(--text-secondary); /* Use secondary text */
     vertical-align: middle;
 }
 
-.spxMainSection {
+.spxMainSection { /* If keeping table display, otherwise adapt for flex */
     height: 100%;
-    display: table-cell;
+    display: table-cell; /* Or flex item */
     width: 100%;
     vertical-align: middle;
-    border: 0px solid green;
+    /* border: 0px solid green; */
+    padding: 1em; /* Add padding */
 }
 
-.spxTableRow {
+.spxTableRow { /* If keeping table display, otherwise adapt for flex */
     height: 100%;
-    display: table-row;
+    display: table-row; /* Or flex item */
     width: 100%;
     vertical-align: middle;
-    border: 0px solid green;
+    /* border: 0px solid green; */
 }
 
-.spxCell {
-    display: table-cell;
+.spxCell { /* If keeping table display, otherwise adapt for flex */
+    display: table-cell; /* Or flex item */
     vertical-align: middle;
-    margin: 10px !important;
+    margin: 10px !important; /* Keep if essential */
     text-align: left;
     padding: 10px;
+    background-color: var(--neutral-2); /* Add background to cells */
+    border-radius: 4px; /* Round cell corners */
+}
+
+.spxPanelL, .spxPanelR, .spxPanelC { /* These suggest a 3-column layout */
+    color: var(--text-primary);
+    padding: 0.5em; /* Add padding */
 }
 
 .spxPanelL {
-    width: 50%;
-    color: white;
+    width: 50%; /* Keep if structure is fixed */
 }
 
 .spxPanelC {
-    width: 0.1em;
-    /* background: red; */
-    color: white;
+    width: 1px; /* Make it a thin separator line */
+    background: var(--border-color); /* Use border color for separator */
+    margin: 0 0.5em; /* Add margin */
 }
 
 .spxPanelR {
-    color: white;
-    border-left: 2px solid grey;
-    margin-left: 10px;
+    border-left: none; /* Remove old border if .spxPanelC is used as separator */
+    margin-left: 0; /* Remove old margin */
 }
 
+
 .spxTableHead {
-    color: white;
+    color: var(--brand-primary); /* Brand color for table head */
     text-transform: uppercase;
-    font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    text-shadow: rgba(255, 255, 255, 0.1) 0 0 2px;
+    font-family: "UI-Bold", Arial, Helvetica, sans-serif; /* Bolder font */
+    text-shadow: none; /* Remove text shadow for modern look */
     line-height: 2em;
-    font-size: 0.75em;
-    margin: auto auto;
-    border: 0px solid pink;
+    font-size: 0.85em; /* Adjusted size */
+    margin: auto;
+    /* border: 0px solid pink; */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding-bottom: 0.5em; /* Add padding */
 }
 
 .spxConfigHead {
-    color: rgba(255, 255, 255, 0.52);
+    color: var(--text-secondary);
     font-family: "UI-Regular";
-    text-shadow: rgba(255, 255, 255, 0.1) 0 0 2px;
-    font-size: 0.75em;
-    margin: auto auto;
-    border: 0px solid pink;
+    text-shadow: none;
+    font-size: 0.8em; /* Adjusted size */
+    margin: auto;
+    /* border: 0px solid pink; */
     white-space: nowrap;
 }
 
 .spxConfigBody {
-    color: rgba(255, 255, 255, 0.52);
+    color: var(--text-secondary);
     font-family: "UI-Regular";
-    font-size: 0.7em;
+    font-size: 0.75em; /* Adjusted size */
 }
 
-.prvar {
-    color: rgba(255, 255, 255, 0.2);
-    font-family: monospace;
+.prvar { /* For project variables display */
+    color: var(--text-secondary);
+    font-family: "Courier New", Courier, monospace; /* Monospace for code-like text */
     float: right;
     padding-right: 1em;
+    background-color: var(--neutral-2); /* Add subtle background */
+    padding: 0.2em 0.5em; /* Add padding */
+    border-radius: 3px; /* Add rounding */
 }
 
 .spxInfotext {
-    font-size: 0.6em;
+    font-size: 0.7em; /* Adjusted size */
     font-family: "UI-Regular", Arial, Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    opacity: 0.7;
-    line-height: 120%;
+    opacity: 0.8; /* More visible */
+    line-height: 1.4; /* Adjusted line height */
+    color: var(--text-secondary);
 }
 
-.spxInfoRegtext {
-    font-size: 0.7em;
-    color:rgb(198, 198, 198);
+.spxInfoRegtext { /* Similar to spxInfotext, consolidate if possible */
+    font-size: 0.75em; /* Adjusted size */
+    color: var(--text-secondary);
     font-family: "UI-Regular", Arial, Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -863,76 +895,78 @@ div.curfolder{
 }
 
 .spxTableHeadsmall {
-    font-size: 0.6em;
+    font-size: 0.65em; /* Adjusted size */
     font-family: "UI-Regular", Arial, Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    text-shadow: rgba(255, 255, 255, 0.5) 0 0 2px;
-    opacity: 0.75;
-    line-height: 1; /* 75%; */
+    text-shadow: none;
+    opacity: 0.7;
+    line-height: 1.2; /* Adjusted line height */
+    color: var(--text-secondary);
+    text-transform: uppercase; /* Add uppercase for small headers */
 }
 
-
 .footer {
-    height: 32px;
-    border: 0px solid orange;
+    height: auto; /* Auto height for footer */
+    min-height: 32px; /* Keep min-height */
+    /* border: 0px solid orange; */
     margin: 8px 10px 4px 10px;
     padding: 8px 10px;
-  }
+    border-top: 1px solid var(--border-color); /* Add top border to footer */
+    display: flex; /* Use flex for footer content alignment */
+    align-items: center;
+    justify-content: space-between; /* Space out footer items */
+}
 
-
+/* Footer table styles, consider if a table is truly needed here */
 table.footerTable, td.footerTable, tr.footerTable, span.statusbar div.footerTable{
     padding: 0px;
     margin: 0px;
     line-height: 16px;
     font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    font-size:  14px;
+    font-size:  0.8em; /* Adjusted size */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: var(--text-secondary); /* Use secondary text */
 }
 
-
-
-.statusbar
-    {
-    color:      #aaaaaa;
+.statusbar {
+    color: var(--text-secondary);
     font-family: Arial, Helvetica, sans-serif;
-    font-size:  100%;
+    font-size:  0.9em; /* Adjusted size */
     padding:    3px 3px;
-    }
+}
 
-.statusBarWarn
-    {
-    color:      #ffb95d;
-    }
+.statusBarWarn {
+    color: var(--accent-warning); /* Use warning accent */
+    font-weight: bold; /* Make warning text bold */
+}
 
-.statusBarWarn::before
-    {
+.statusBarWarn::before {
+    font-family: "FontAwesomeSol900"; /* Ensure FontAwesome is loaded and available */
+    content:    "\f071"; /* Keep icon */
+    color: var(--accent-warning);
+    font-size: 80%; /* Adjusted size */
+    margin-right: 8px; /* Increased margin */
+}
+
+.statusBarError {
+    background-color: var(--accent-error); /* Use error accent */
+    color: var(--text-primary); /* Ensure text is readable */
+    padding: 0.3em 0.6em; /* Add some padding */
+    border-radius: 4px; /* Add rounding */
+}
+
+.statusBarError::before {
     font-family: "FontAwesomeSol900";
     content:    "\f071";
-    color: rgb(230, 137, 16);
-    font-size: 60%;
-    margin-right: 6px;
-    }
+    color: var(--text-primary); /* Ensure icon is visible on error bg */
+    font-size: 80%;
+    margin-right: 8px;
+}
 
-
-
-.statusBarError
-    {
-    background-color: rgba(124, 9, 9, 0.808);
-    color:      #f3ebeb;
-    }
-
-.statusBarError::before
-    {
-    font-family: "FontAwesomeSol900";
-    content:    "\f071";
-    color: rgb(230, 226, 16);
-    font-size: 60%;
-    margin-right: 6px;
-    }
 
 .tooltipzone {
     position: relative;
@@ -941,26 +975,27 @@ table.footerTable, td.footerTable, tr.footerTable, span.statusbar div.footerTabl
 
 .tooltipzone .tooltip {
     visibility: hidden;
-    background-color: black;
-    color: #fff;
+    background-color: var(--neutral-1); /* Darker tooltip background */
+    color: var(--text-primary);
     text-align: center;
-    border-radius: 6px;
-    padding: 0.1em 0.7em;
-    font-size: 0.9em;
+    border-radius: 4px; /* Standard rounding */
+    padding: 0.4em 0.8em; /* Adjusted padding */
+    font-size: 0.85em; /* Adjusted size */
     opacity: 0;
     position: absolute;
-    z-index: 1;
-    top: 100%;
+    z-index: 1002; /* Ensure tooltip is on top */
+    top: 110%; /* Position slightly further from element */
     left: 50%;
-    transform: translate(-50%, 10px);
-    transition: opacity 1.5s;
+    transform: translateX(-50%); /* Keep centering */
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out; /* Smoother transition */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2); /* Add shadow */
+    white-space: nowrap; /* Prevent wrapping */
 }
 
 .tooltipzone:hover .tooltip {
     visibility: visible;
     opacity: 1;
 }
-
 
 .vtop{
     vertical-align: top;
@@ -970,234 +1005,235 @@ table.footerTable, td.footerTable, tr.footerTable, span.statusbar div.footerTabl
     vertical-align: middle;
 }
 
-
-.wide
-    {
+.wide {
     width: 100% !important;
-    }
-
-.w50
-    {
-    width: 49% !important;
-    }
-
-.welcome {
-    margin-top:     0.7em;
-    font-family:    Arial, Helvetica, sans-serif;
-    margin-left:    3em;
-    margin-right:   3em;
-    font-size:      0.9em;
-    color:          #cfcfcf;
-    line-height:    1.3em;
-    
 }
 
-.working
-    {
-    background-color: rgb(255, 136, 0);
-    border-radius: 3px;
-    padding: 1px 8px;
-    font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    font-size: 0.85em;
-    text-shadow: rgba(0, 0, 0, 1.0) 0 0 6px;
-    color: white;
-    margin-left: 1.5em;
-    }
+.w50 { /* For 50% width elements */
+    width: 49% !important; /* Keep if precise layout needed, consider gap for flex/grid */
+}
 
+.welcome { /* Welcome message text */
+    margin-top:     0.7em;
+    font-family:    "UI-Light", Arial, Helvetica, sans-serif; /* Lighter font */
+    margin-left:    auto; /* Center welcome text */
+    margin-right:   auto;
+    max-width:      800px; /* Max width for readability */
+    padding:        1em 2em; /* Add padding */
+    font-size:      1em; /* Adjusted size */
+    color:          var(--text-secondary);
+    line-height:    1.6em; /* Increased line height */
+    text-align:     center; /* Center align text */
+    background-color: var(--neutral-1); /* Add a subtle background */
+    border-radius: 8px; /* Add rounding */
+}
+
+.working { /* "Working" indicator style */
+    background-color: var(--accent-warning); /* Use warning accent */
+    border-radius: 4px;
+    padding: 2px 10px; /* Adjusted padding */
+    font-family: "UI-Regular", Arial, Helvetica, sans-serif;
+    font-size: 0.8em; /* Adjusted size */
+    text-shadow: none; /* Remove shadow */
+    color: #000000; /* Black text on yellow for contrast */
+    margin-left: 1.5em;
+}
 
 .wrapper {
     height: 100%;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    border: 0px solid green;
-    }
+    /* border: 0px solid green; */ /* Removed debug border */
+}
 
-
-.itemrow {
-    background-color: rgba(255,255,255,0.05);
-    border-top: 2px solid transparent !important;
-    border-right: 2px solid transparent !important;
-    border-bottom: 2px solid transparent !important;
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 8px;
+.itemrow { /* For rows in a list, e.g., rundown items */
+    background-color: var(--neutral-2); /* Use neutral bg */
+    border: 1px solid var(--border-color); /* Add border */
+    border-left: 4px solid transparent; /* For active/focus indication */
+    border-radius: 6px; /* More rounding */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Softer shadow */
     cursor: pointer;
-    margin-bottom: 8px;
-    transition: border-left 0.3s, color 0.2s, background-color 0.2s, border-width 0.2s;
+    margin-bottom: 10px; /* Increased margin */
+    padding: 0.8em 1em; /* Add padding */
+    transition: border-left-color 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .itemrow:hover {
-    background-color: rgba(153, 218, 255, 0.1);
-    /* border-width: 2px 2px 2px 15px; */
+    background-color: var(--neutral-3); /* Slightly lighter on hover */
+    border-left-color: var(--brand-primary-darker); /* Darker brand for hover */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* Slightly stronger shadow on hover */
 }
 
-
-.inFocus {
-    border-top: 2px solid rgba(187, 164, 60, 0.746) !important;
-    border-right: 2px solid rgba(141, 122, 13, 0.431) !important;
-    border-bottom: 2px solid rgba(158, 120, 14, 0.527) !important;
-    transition: background-color 0.2s, border-left 0.3s, box-shadow 0.6s;
-    background-color: rgba(0, 0, 0, 0.1);
-    box-shadow: rgba(156, 119, 50, 0.3) 0px 0px 10px;
+.inFocus { /* For focused items */
+    background-color: var(--neutral-1); /* Darker background for focus */
+    border: 1px solid var(--brand-primary); /* Brand color border */
+    border-left: 4px solid var(--brand-primary); /* Prominent left border */
+    box-shadow: 0 0 8px rgba(85, 187, 75, 0.3); /* Brand color glow */
+    color: var(--text-primary); /* Ensure text is primary on focus */
 }
 
-.inFocus:hover {
-    transition: background-color 0.2s, border-left 0.3s;
-    background-color: rgba(0, 0, 0, 0.1);
-    box-shadow: rgba(218, 112, 13, 0.657) 0px 0px 10px;
-    /* border-width: 2px 2px 2px 15px; */
+.inFocus:hover { /* Keep consistent with inFocus state on hover */
+    background-color: var(--neutral-1);
+    border-left-color: var(--brand-primary);
+    box-shadow: 0 0 10px rgba(85, 187, 75, 0.4); /* Slightly stronger glow */
 }
 
-#messageSlider {
-    top: 0px;
+#messageSlider { /* For global messages/notifications */
+    top: 10px; /* Position from top */
     left: 50%;
-    opacity: 0; /* animated */
+    transform: translateX(-50%); /* Center horizontally */
+    opacity: 0; /* Animated */
     display: flex;
-    z-index: 1000;
-    min-width: 10%;
-    font-size: 0.8em;
-    position: absolute;
-    padding: 0.5em 2em;
+    z-index: 2000; /* High z-index */
+    min-width: 250px; /* Min width */
+    font-size: 0.9em; /* Adjusted size */
+    position: fixed; /* Fixed position for global messages */
+    padding: 0.8em 1.5em; /* Adjusted padding */
     align-items: center;
     justify-content: center;
-    border-radius: 0 0 1em 1em;
-    transform: translateX('-100%');
-    color: rgba(255, 255, 255, 0.7);
+    border-radius: 6px;
+    color: var(--text-primary);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Add transform to transition */
 }
 
-.happyMsg {
-    background-color: rgba(20, 116, 68, 0.76);
-    box-shadow: rgba(0, 0, 0, 0.4) 0 2px 10px;    
+/* Message types for the slider */
+.happyMsg { /* Success message */
+    background-color: var(--brand-primary);
 }
 
-.infoMsg {
-    background-color: rgba(0, 0, 0, 0.4);
-    box-shadow: rgba(0, 0, 0, 0.4) 0 2px 10px;    
+.infoMsg { /* Informational message */
+    background-color: var(--neutral-3); /* Use a neutral for info */
+    color: var(--text-primary);
 }
 
-.warnMsg {
-    background-color: rgba(223, 209, 11, 0.794);
-    color: black !important;
-    box-shadow: rgba(0, 0, 0, 0.4) 0 2px 10px;    
+.warnMsg { /* Warning message */
+    background-color: var(--accent-warning);
+    color: #000000; /* Black text on yellow for contrast */
 }
 
-.errorMsg {
-    background-color: rgba(82, 6, 6, 0.705);
-    box-shadow: rgba(0, 0, 0, 0.4) 0 2px 10px;    
+.errorMsg { /* Error message */
+    background-color: var(--accent-error);
+    color: var(--text-primary);
 }
 
-
-.collapsibleZone {
+.collapsibleZone { /* For collapsible sections */
     width: 100%;
-    border: 0px;
+    border: none; /* Remove border */
     outline: none;
-    padding: 0.4em;
+    padding: 0.6em 0.8em; /* Adjusted padding */
     cursor: pointer;
     text-align: left;
-    font-size: 0.6rem;
+    font-size: 0.8rem; /* Adjusted size */
     box-sizing: border-box;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.0);
-    background-color: rgba(0, 0, 0, 0.2);
-  }
+    color: var(--text-secondary); /* Use secondary text */
+    background-color: var(--neutral-2); /* Use neutral bg */
+    border-radius: 4px; /* Add rounding */
+    margin-bottom: 5px; /* Add some space below */
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
 
-.collapsibleZone::before{
-    content: "\25B6";
-    color: white;
+.collapsibleZone::before{ /* Icon for collapsible zone */
+    content: "\25B6"; /* Keep arrow icon */
+    color: var(--text-secondary);
     display: inline-block;
-    margin-right: 12px;
-    transform: rotate(0deg) scale(0.7);
-    transition: transform 0.3s ease-in-out;
+    margin-right: 10px; /* Adjusted margin */
+    transform: rotate(0deg) scale(0.8); /* Adjusted scale */
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .collapsibleZone:hover {
-    color: rgba(255, 255, 255, 1.0);
-    transition: all 0.3s ease-in-out;
-    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+    background-color: var(--neutral-3); /* Lighten on hover */
+}
+.collapsibleZone:hover::before {
+    color: var(--brand-primary); /* Brand color for icon on hover */
 }
 
-.activeZone {
-    color: rgba(255, 255, 255, 1.0);
-    background-color: rgba(255, 255, 255, 0.2);
+.activeZone { /* Active state for collapsible zone */
+    color: var(--text-primary);
+    background-color: var(--brand-primary-darker); /* Brand color for active */
 }
-
        
 .activeZone::before{
-    content: "\25B6";
-    color: white;
-    display: inline-block;
-    /* margin-right: 12px; */
-    transform: rotate(90deg)  scale(1.0);
-    transition: transform 0.3s ease-in-out;
+    color: var(--text-primary); /* White icon on brand bg */
+    transform: rotate(90deg) scale(0.9); /* Rotate and slightly larger */
 }
 
-.edge_program {
-    border-right: solid rgba(20, 138, 50, 0.582) 6px;
+.edge_program { /* Border indicator for program items */
+    border-right: 6px solid var(--brand-primary); /* Use brand color */
 }
 
-.edge_preview {
-    border-right: solid rgba(177, 24, 24, 0.7) 6px;
+.edge_preview { /* Border indicator for preview items */
+    border-right: 6px solid var(--accent-error); /* Use error/warning color for preview */
 }
 
-.closePromo {
+.closePromo { /* Style for a close button on promos */
+    color: var(--text-secondary);
     transition: all 200ms ease-in-out;
 }
 
 .closePromo:hover {
-    transform: rotate(90deg);
+    transform: rotate(90deg) scale(1.1); /* Scale up on hover */
+    color: var(--brand-primary); /* Brand color on hover */
 }
 
-.wrap {
+.wrap { /* Utility class for text wrapping */
     white-space: normal;
 }
 
-#rdOptionsCollapsible {
-    display: none; /* controlled */
+#rdOptionsCollapsible { /* Collapsible options for rundown */
+    display: none;
     box-sizing: border-box;
-    padding: 0;
+    padding: 0.5em; /* Add padding when open */
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
-    font-size: 0.5rem;
-    background-color: rgba(0,0,0,0.1);
+    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out; /* Smooth transition */
+    font-size: 0.7rem; /* Adjusted size */
+    background-color: var(--neutral-1); /* Use neutral bg */
     border-radius: 0.5rem;
     margin-bottom: 0.5rem;
-  }
+    border: 1px solid var(--border-color); /* Add border */
+}
 
-  .RDoptionsText {
-    color: white;
-    border: 2px solid transparent;
+.RDoptionsText { /* Text input within rundown options */
+    color: var(--text-primary);
+    background-color: var(--neutral-2); /* Background for input */
+    border: 1px solid var(--border-color); /* Border for input */
+    border-radius: 4px; /* Rounding for input */
     margin-left: 0.1em;
     margin-right: 0.1em;
-    text-shadow: rgb(0, 0, 0, 0.4) 0 0px 8px;
-    padding-inline-start: 5px;
-    font-size: 0.8em;
+    text-shadow: none; /* Remove shadow */
+    padding: 0.4em 0.6em; /* Padding for input */
+    font-size: 0.9em; /* Adjusted size */
     font-family: "UI-Light", Arial, Helvetica, sans-serif;
+    width: calc(100% - 0.2em); /* Full width minus margins */
 }
 
 .RDoptionsText::placeholder {
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--text-secondary); /* Secondary text for placeholder */
     font-style: italic;
     font-size: inherit;
 }
 
-
-.namedContentIndicator {
-    --darkCol: rgba(59, 4, 4, 0.494);
-    --liteCol: rgba(99, 9, 9, 0.375);
-    --textCol: rgb(255, 255, 255);
-    --bordCol: rgba(255, 255, 255, 0.355);
+.namedContentIndicator { /* Indicator for named content */
+    --darkCol: var(--brand-primary-darker); /* Use brand colors */
+    --liteCol: var(--brand-primary);
+    --textCol: var(--text-primary);
+    --bordCol: var(--brand-primary);
     z-index: 10;
-    font-size: 0.5em;
-    padding: 0.2em 0.7em;
+    font-size: 0.6em; /* Adjusted size */
+    padding: 0.3em 0.8em; /* Adjusted padding */
     border-radius: 0.4em;
     margin-left: 1em;
     justify-content: center;
-    background-size: 1vw 1vw;
+    background-size: 12px 12px; /* Adjusted bg size */
     color: var(--textCol);
-    box-shadow: 0 0 0.4em rgba(204, 13, 13, 0.76);
+    box-shadow: 0 0 0.4em rgba(85, 187, 75, 0.5); /* Brand color shadow */
     border: 1px solid var(--bordCol);
-    text-shadow: 1px 1px 1px rgb(0, 0, 0);
+    text-shadow: none; /* Remove text shadow */
     font-family: "UI-Regular", Arial, Helvetica, sans-serif;
     background-image: linear-gradient(
       135deg,

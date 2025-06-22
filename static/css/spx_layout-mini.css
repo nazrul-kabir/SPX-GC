@@ -1,22 +1,22 @@
 /*
   Copyright 2020 Softpix
   CSS file for basic stuff. Must be loaded first.
+  Updated for modern look with CSS variables.
 */
 
-:root {
-    --darkGrey: #2A3641;
-}
-
+/* Using CSS variables defined in spx_colors.css */
+/* :root {
+    --darkGrey: #2A3641; // This is now --neutral-1 or similar from spx_colors.css
+} */
 
 html, body {
     margin: 0px;
     height: 100%;
-    color: white;
-    /* overflow: hidden; */
-    font-size: 1.0em;
+    color: var(--text-primary); /* Use global text color */
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem); /* Adjusted base font size for mini layout */
     box-sizing: border-box;
     font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    background-color: var(--darkGrey);
+    background-color: var(--background-dark); /* Use global dark background */
 }
 
 *, *:before, *:after {
@@ -24,138 +24,127 @@ html, body {
     padding: 0;
     user-select: none;
     box-sizing: inherit;
-    }
-
+}
 
 .HIDE{
-    /* WHILE DEBUGGING unhide OBJECTS with display:no-none ++++++++++++++++++++++++++ */
-    display     :      none; /*change this to no-none to see debug data in editors */
-    border      :      2px dashed rgb(0, 248, 0);
-    padding     :      5px;
-    margin      :      5px;
-    background-color: rgba(173, 76, 11, 0.246);
-    /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  */
+    display: none;
+    border: 2px dashed var(--brand-primary); /* Consistent with spx_layout.css */
+    padding: 5px;
+    margin: 5px;
+    background-color: rgba(85, 187, 75, 0.1);
 }
 
 .minicontent {
     flex-grow: 1;
     overflow: auto;
-    border: 0px solid red;
-    background-color: var(--darkGrey);
+    /* border: 0px solid red; */ /* Removed debug border */
+    background-color: var(--background-dark); /* Consistent background */
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 0.4em;
+    padding: 0.5em; /* Consistent padding */
 }
-
 
 .wrapper {
     height: 100%;
     display: flex;
     overflow: hidden;
     flex-direction: column;
-    border: 0px dotted green;
+    /* border: 0px dotted green; */ /* Removed debug border */
 }
 
 .viewer {
     flex-grow: 0;
-    /* overflow: hidden; */
-    border: 0px solid red;
+    /* overflow: hidden; */ /* Allow content to manage its overflow */
+    /* border: 0px solid red; */
+    border-bottom: 1px solid var(--border-color); /* Add separator if content is above */
 }
 
 #footer {
     width: 100%;
     display: flex;
-    flex-grow: 1;
+    flex-grow: 0; /* Footer should not grow excessively */
+    flex-shrink: 0; /* Prevent footer from shrinking */
+    min-height: 30px; /* Minimum height */
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding: 0.2em;
+    padding: 0.3em 0.5em; /* Adjusted padding */
+    background-color: var(--neutral-1); /* Consistent footer background */
+    border-top: 1px solid var(--border-color); /* Separator */
 }
 
 .footerAndInfo {
     display: flex;
     align-items: center;
     flex-direction: column;
-    border: 0px solid red;
-    background-color: var(--darkGrey);
+    /* border: 0px solid red; */
+    background-color: var(--background-dark); /* Match body background */
+    width: 100%; /* Take full width */
 }
 
 .experimentalInfo {
     width: 100%;
-    opacity: 0.4;
-    font-size: 0.7em;
+    opacity: 0.6; /* Slightly more visible */
+    font-size: 0.8em; /* Adjusted size */
     text-shadow: none;
     text-align: center;
     font-weight: normal;
-    padding: 0 0 0.7em 0;
-    font-family: 'UI-Light';
+    padding: 0.5em 0; /* Adjusted padding */
+    font-family: 'UI-Light', Arial, Helvetica, sans-serif;
+    color: var(--text-secondary); /* Use secondary text color */
 }
 
+/* Item row styling consistent with spx_layout.css */
 .itemrow {
-    background-color: rgba(255,255,255,0.05);
-    border-top: 2px solid transparent !important;
-    border-right: 2px solid transparent !important;
-    border-bottom: 2px solid transparent !important;
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 8px;
+    background-color: var(--neutral-2);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid transparent;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     cursor: pointer;
-    margin-bottom: 8px;
-    transition: border-left 0.3s, color 0.2s, background-color 0.2s, border-width 0.2s;
+    margin-bottom: 8px; /* Keep existing margin if specific to mini layout */
+    padding: 0.6em 0.8em; /* Adjusted padding */
+    transition: border-left-color 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
-
 .itemrow:hover {
-    background-color: rgba(153, 218, 255, 0.08);
-    border-width: 2px 2px 2px 15px;
+    background-color: var(--neutral-3);
+    border-left-color: var(--brand-primary-darker);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    /* border-width: 1px 1px 1px 4px; Remove if not desired */
 }
 
-.scroller::-webkit-scrollbar-track
-    {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.0);
-    border-radius: 0px;
-    background-color: #414C5A;
+/* Modern scrollbar styles, consistent with spx_layout.css */
+.scroller::-webkit-scrollbar {
+    width: 10px; /* Thinner scrollbar for mini layout */
+    background-color: var(--neutral-1);
 }
-
-.scroller::-webkit-scrollbar
-    {
-    width: 14px;
-    background-color: #414C5A;
-    border: 0px solid yellow;
-    }
-
-
-
-.scroller::-webkit-scrollbar-thumb
-    {
+.scroller::-webkit-scrollbar-track {
+    background-color: var(--neutral-1);
     border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.0);
-    background-color: #677180;
-    padding: 10px;
-    }
-
-.scroller::-webkit-scrollbar-thumb:hover
-    {
-    background-color: #718cb4;
-    }
-
+}
+.scroller::-webkit-scrollbar-thumb {
+    background-color: var(--neutral-3);
+    border-radius: 10px;
+    border: 2px solid var(--neutral-1);
+}
+.scroller::-webkit-scrollbar-thumb:hover {
+    background-color: var(--brand-primary);
+}
 
 ul {
-    padding-left: 2em;
+    padding-left: 1.5em; /* Slightly reduced padding */
+    list-style: none; /* Remove default list style for modern look */
 }
 
-a:link,
-a:visited {
-    color: white;
+/* Links consistent with spx_layout.css */
+a, a:link, a:visited {
+    color: var(--text-primary);
     text-decoration: none;
+    transition: color 0.2s ease-in-out;
 }
-
-a:hover {
-    color: orange;
-    text-decoration: none;
-}
-
-a:active {
-    color: orange;
+a:hover, a:active {
+    color: var(--brand-primary);
     text-decoration: none;
 }
 
@@ -163,225 +152,192 @@ div {
     box-sizing: border-box;
 }
 
+/* Headings consistent with spx_layout.css, adjusted for mini */
 h2{
-    margin-top: 80px;
-    font-size: 0.7rem;
-    margin-bottom: 2px;
-    letter-spacing: 2px;
+    margin-top: 1.5em; /* Adjusted margin */
+    font-size: 0.9em; /* Adjusted for mini layout */
+    margin-bottom: 0.2em;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: rgb(25, 134, 212);
+    color: var(--brand-primary);
     font-family: "UI-Light", Arial, Helvetica, sans-serif;
 }
-
 h2:first-of-type{
-    margin-top: 10px;
+    margin-top: 0.5em; /* Less margin for first heading */
 }
 
-.h2hr {
-    margin: 6px 0px 10px 0px;
-    border: 1px solid rgba(0,0,0,0.0);
-    border-top: 2px solid rgba(0,0,0,0.2);
-    border-bottom: 1px solid rgba(106, 112, 119, 0.5);
+.h2hr, hr, hr.menuDivider { /* Consistent hr styling */
+    margin: 0.5em 0 1em 0; /* Adjusted margins */
+    border: 0;
+    border-top: 1px solid var(--border-color);
 }
-
-
-hr {
-    margin: 5px 0px 20px 0px;
-    border: 1px solid rgba(0,0,0,0.0);
-    border-top: 1px solid rgba(0,0,0,0.2);
-    border-bottom: 1px solid rgba(138, 138, 138, 0.2);
-}
-
 hr.menuDivider {
-    margin: 5px 0;
-    border: 1px solid rgba(0,0,0,0.0);
-    border-top: 2px solid rgba(0,0,0,0.5);
-    border-bottom: 1px solid rgba(161, 161, 161, 0.2);
+    border-top: 1px solid var(--neutral-1);
 }
-
 
 td {
     vertical-align: middle;
-    border: 0px solid yellow;
+    /* border: 0px solid yellow; */ /* Removed debug border */
+    padding: 0.4em; /* Default padding for table cells in mini layout */
 }
-
-
 
 iframe {
-    transform-origin:   top left;
-    background-color:   rgb(0, 0, 0);
-    border:             1px solid rgb(0, 0, 0);
-    /* removed in 1.1.0 -----
-    width:              1920px;
-    height:             1080px; */
-    overflow:           hidden;
+    transform-origin: top left;
+    background-color: #000000;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
 }
-
-
-/* html elements above this line, custom classes alphabetized below */
-
 
 td.aright{
     text-align: right;
 }
 
-
-.beta
-    {
-    background-color: rgba(138, 113, 113, 0.822);
-    border-radius: 0px;
-    padding: 1px 8px;
+/* Beta tag styling consistent with spx_layout.css */
+.beta {
+    background-color: var(--neutral-3);
+    border-radius: 3px;
+    padding: 1px 6px; /* Adjusted padding */
     font-family: "UI-Bold", Arial, Helvetica, sans-serif;
-    font-size: 0.85em;
-    color: rgb(48, 48, 48);
+    font-size: 0.7em; /* Adjusted size */
+    color: var(--text-secondary);
     margin-left: 0.25em;
     margin-right: 0.75em;
-    border-bottom: 2px solid rgb(128, 21, 7);
-    }
+    border-bottom: 1px solid var(--brand-primary-darker); /* Thinner border */
+}
 
-
-.brd{
-    border: 2px dotted white;
+.brd{ /* Dotted border, consistent with spx_layout.css */
+    border: 1px dashed var(--text-secondary);
     border-collapse: separate;
 }
 
-
+/* Breadcrumbs consistent with spx_layout.css, adjusted for mini */
 .breadcrumbs{
     font-family: "UI-Light", Arial, Helvetica, sans-serif;
-    font-size: 0.9rem;
-    color:  #B9BDC2;
-    border: 0px solid yellow;
+    font-size: 0.8em; /* Adjusted size */
+    color:  var(--text-secondary);
+    /* border: 0px solid yellow; */
     text-transform: uppercase;
 }
-
 .breadcrumbGear {
-    opacity: 0.3;
-    font-size: 0.7em;
-    color:  #ffffff;
-    margin-left: 0.7em;
-    border: 0px solid red;
-    margin-bottom: 3px;
+    opacity: 0.6;
+    font-size: 0.8em; /* Adjusted size */
+    color:  var(--text-primary);
+    margin-left: 0.5em; /* Adjusted margin */
+    /* border: 0px solid red; */
+    margin-bottom: 0; /* Align better with text */
     display: inline-block;
+    vertical-align: middle; /* Align gear with text */
+    transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
 }
-
 .breadcrumbGear:hover {
     opacity: 1.0;
+    color: var(--brand-primary);
     cursor: pointer;
 }
-
-.breadtd {
-    position: relative;
-}
-
-.breadIcon {
+.breadtd { position: relative; } /* Keep if used for specific alignment */
+.breadIcon { /* Adjust if used, ensure consistency */
     height: 100%;
     width: fit-content;
-    position: absolute;
+    position: absolute; /* Or inline-flex depending on usage */
     display: inline-flex;
     justify-content: center;
     align-items: center;
 }
 
-
+/* Caption styling consistent with spx_layout.css */
 .caption{
     font-size: 0.7em;
-    opacity: 0.6;
+    color: var(--text-secondary);
+    opacity: 0.8;
 }
 
-
+/* Caret icon styling consistent with spx_layout.css */
 .caret-icon{
-    font-size: 1.0rem;
-    color:  #237BBA;
-    margin: 0px 5px 0px 5px  !important;
+    font-size: 0.9em; /* Adjusted for mini */
+    color:  var(--brand-primary);
+    margin: 0px 4px !important; /* Adjusted margin */
 }
 
+/* Plugin button div styling consistent with spx_layout.css, adjusted for mini */
 .gcpluginbuttondiv {
     display: flex;
     align-items: center;
-    font-size: 0.6rem;
-    margin-top: 1em;
-    padding: 0.6em 0.4em 0.6em 0.4em;
-    /* overflow: hidden; */
-    background-color: rgba(0,0,0,0.1);
-    border-top: 1px solid rgba(0,0,0,0.7) !important;
-    border-bottom: 1px solid rgba(255,255,255,0.3) !important;
+    font-size: 0.7em; /* Adjusted size */
+    margin-top: 0.8em; /* Adjusted margin */
+    padding: 0.5em 0.3em; /* Adjusted padding */
+    background-color: var(--neutral-1);
+    border: 1px solid var(--border-color) !important; /* Use standard border */
+    border-radius: 4px;
 }
-
 .gcplugindescription {
-    font-size: 0.5;
-    color:  rgba(255,255,255,0.5);
+    font-size: 0.8em; /* Relative to parent */
+    color:  var(--text-secondary);
 }
 
+.center { text-align: center !important; }
 
-.center {
-    text-align: center !important;
-    }
-
-
-.centerColumn {
+.centerColumn { /* Consistent with spx_layout.css, but width might differ for mini */
     margin: auto;
-    width: 70%;
+    width: 90%; /* Wider for mini layout if appropriate */
+    max-width: 600px; /* Max width for mini */
     height: 100%;
     overflow: auto;
-    border: 0px solid salmon;
-    }
+    /* border: 0px solid salmon; */
+}
     
-.helpid,
-.copyid {
+/* Helpid, copyid styling consistent with spx_layout.css */
+.helpid, .copyid {
     margin-left: 0.25em;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 0.3em 0.6em;
-    border-radius: 0.2em;
-    color:rgba(255, 255, 255, 0.4);
-    transition: all 0.2s linear ;
-    }
-
+    background: var(--neutral-1);
+    padding: 0.3em 0.5em; /* Adjusted padding */
+    border-radius: 0.3em;
+    color: var(--text-secondary);
+    transition: all 0.2s linear;
+    font-size: 0.9em; /* Ensure text is readable */
+}
 .copyid:hover {
-    background: rgba(0, 0, 0, 0.5);
-    color:rgb(255, 255, 255);
-    transition: all 0.2s linear ;
-    }
-
+    background: var(--neutral-2);
+    color: var(--text-primary);
+}
 .helpid:hover {
-    background: rgb(5, 45, 145);
-    color:rgb(255, 255, 255);
-    transition: all 0.2s linear ;
+    background: var(--brand-primary-darker);
+    color: var(--text-primary);
     cursor: help;
-    }
+}
     
-
-
-
+/* Delimiter styling consistent with spx_layout.css */
 .delim {
-    color:          rgba(53, 178, 250, 0.651);
+    color: var(--brand-primary);
     margin-right:   0.5em;
     margin-left:    0.5em;
 }
+.delim::before { content: "|"; }
 
-.delim::before {
-    content:        "|";
-}
-
+/* Divider styling consistent with spx_layout.css, adjusted for mini */
 .divider {
     display: block;
     font-family: "UI-Light", Arial, Helvetica, sans-serif;
     text-align: left;
-    font-size: 0.5em;
+    font-size: 0.7em; /* Adjusted size */
     text-transform: uppercase;
-    margin-top: 1.5em;
-    padding-bottom: 0.4em;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    margin-top: 1em; /* Adjusted margin */
+    padding-bottom: 0.3em; /* Adjusted padding */
+    border-bottom: 1px solid var(--border-color);
     margin-bottom: 0.5em;
-    opacity: 0.5;
+    opacity: 0.7;
+    color: var(--text-secondary);
 }
 
+/* Logo styling consistent with spx_layout.css, potentially smaller for mini */
 #logo {
-    width: 2em; /*50px;*/
+    width: clamp(1.2rem, 1.8em, 1.8rem); /* Slightly smaller for mini */
     margin:0;
     opacity:1;
 }
 
-.dropdown {
+/* Dropdown styling needs to be carefully reviewed for mini layout */
+/* Assuming similar functionality but potentially more compact */
+.dropdown { /* Consistent with spx_layout.css */
     position: relative;
     display: inline-block;
     font-family: "UI-Light", Arial, Helvetica, sans-serif;
@@ -389,188 +345,184 @@ td.aright{
     vertical-align: middle;
     z-index:500;
 }
-
-.scrollingMenuArea {
-    border: 0px solid purple;
-    max-height: 100vh;
-    overflow-y: scroll;
-    position: relative;
-}
-
-
-.dropdown-content {
+.scrollingMenuArea { /* This might be the dropdown content area */
+    /* border: 0px solid purple; */
+    max-height: 80vh; /* Slightly less max height for mini */
+    overflow-y: auto; /* Changed to auto */
+    position: absolute; /* Ensure it's absolute for dropdown behavior */
+    background-color: var(--neutral-1);
     font-family: "UI-Light", Arial, Helvetica, sans-serif;
-    display: none;
-    position: relative;
-    background-color: #272833;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    padding: 0.5em;
-    z-index: 1;
-    line-height: 2em;
-    font-size: clamp(0.8rem, 0.8em, 2.0rem);
+    box-shadow: 0px 6px 12px 0px rgba(0, 0, 0, 0.25); /* Adjusted shadow */
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    z-index: 1000; /* Ensure it's on top */
+    padding: 0.5em; /* Add padding */
 }
-
+.dropdown-content { /* Content within dropdown */
+    font-family: "UI-Light", Arial, Helvetica, sans-serif;
+    display: none; /* Controlled by JS/hover */
+    /* position: relative; */ /* If inside scrollingMenuArea, might not need to be absolute */
+    background-color: transparent; /* Inherit from scrollingMenuArea or set if different */
+    /* box-shadow: none; */ /* Shadow on scrollingMenuArea */
+    padding: 0; /* Padding on links instead */
+    z-index: 1;
+    line-height: 1.8em; /* Adjusted line height */
+    font-size: clamp(0.8rem, 0.9em, 1.2rem); /* Adjusted for mini */
+}
 .dropdown:hover .dropdown-content,
-.dropdown:hover .dropdown-content-right {
+.dropdown:hover .dropdown-content-right { /* Hover to show */
     display: block;
 }
-
 .dropdown-content a,
-.dropdown-content-right a {
+.dropdown-content-right a { /* Links within dropdown */
     white-space: nowrap;
+    display: block;
+    padding: 0.4em 0.6em; /* Padding on links */
+    color: var(--text-primary);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    border-radius: 3px; /* Round corners for links */
 }
-
-
-.dropdown-content-right {
-    /* CasparCG servers dropdown */
+.dropdown-content a:hover,
+.dropdown-content-right a:hover {
+    background-color: var(--brand-primary);
+    color: var(--text-primary);
+}
+.dropdown-content-right { /* For right-aligned dropdowns */
     right: 0;
-    font-family: "UI-Light", Arial, Helvetica, sans-serif;
-    display: none;
-    position: absolute;
-    background-color: #272833;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    padding: 0.5em;
-    z-index: 1;
-    line-height: 2em;
-    font-size: 0.8em;
+    left: auto;
+    /* Other styles inherited or similar to .dropdown-content / .scrollingMenuArea */
+    transform-origin: top right;
 }
 
-
+/* File browser elements consistent with spx_layout.css, minor adjustments for mini */
 .file, .folder{
     user-select: none;
     display: block;
     cursor: pointer;
+    padding: 0.2em 0;
+    transition: background-color 0.2s ease-in-out;
 }
-
+.file:hover, .folder:hover {
+    background-color: var(--neutral-1);
+}
 .filebrowser {
-    font-size: 0.9em;
-    padding: 0.1em;
-    border: 0px solid pink;
-    padding: 0.7em;
-    background-color: rgba(0, 0, 0, 0.1);
+    font-size: 0.85em; /* Slightly smaller */
+    padding: 0.5em;
+    background-color: var(--neutral-1);
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
 }
-
 .selectedFile{
-    border-left: 3px solid orange;
-    border-right: 3px solid orange;
-    background-color: rgba(255, 166, 0, 0.157);
+    border-left: 3px solid var(--brand-primary);
+    border-right: 3px solid var(--brand-primary);
+    background-color: var(--brand-primary-darker);
+    color: var(--text-primary);
 }
-
-.filebrowser UL {
-    padding: 0.2em;
-}
-
+.filebrowser UL { padding: 0.2em; list-style: none; }
 .filebrowser LI {
-    font-size: 0.9em;
+    font-size: 1em; /* Relative to .filebrowser */
     padding: 0.5em;
     margin-left: 0px;
-    border-bottom: 1px solid #ffffff28;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
-
+.filebrowser LI:last-child { border-bottom: none; }
 .filebrowser_file, .filebrowser_folder, .filebrowser_up{
-    color: rgb(214, 214, 214);
+    color: var(--text-secondary);
     display: block;
     cursor: pointer;
 }
-
 .filebrowser_file:hover, .filebrowser_folder:hover, .filebrowser_up:hover{
-    color: rgb(227, 239, 245);
-    background-color: #2c3136;
+    color: var(--text-primary);
+    background-color: var(--neutral-2);
 }
-
 div.curfolder{
-    margin-top: 1.0em;
-    padding: 0.1em 1em;
-    color: rgba(227, 239, 245, 0.589);
-    font-size: 0.6em;
+    margin-top: 0.5em; /* Adjusted margin */
+    padding: 0.3em 0.8em; /* Adjusted padding */
+    color: var(--text-secondary);
+    font-size: 0.8em; /* Adjusted size */
+    background-color: var(--neutral-2);
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 3px 3px 0 0; /* Round top corners */
 }
 
+/* Headline area styling consistent with spx_layout.css */
 .headlineArea {
-    border-top: 2px solid grey;
+    border-top: 1px solid var(--border-color); /* Thinner border */
     vertical-align: top;
+    padding-top: 0.5em;
 }
 
-
+/* Header styling consistent with spx_layout.css, ensure it fits mini */
 .header{
-    height: 80px;
-    border: 0px solid pink;
-    }
-
-
-.tableheaderText
-    {
-        color: rgb(25, 134, 212);
-        font-family: "UI-Light", Arial, Helvetica, sans-serif;
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        font-weight: bold;
-    }
-
-.tableheaderHelp
-    {
-        color: rgb(25, 134, 212);
-        font-family: "UI-Light", Arial, Helvetica, sans-serif;
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        font-weight: bold;
-        opacity: 0.5;
-    }
-
-.tableheaderHelp:hover
-    {
-        color: rgb(250, 201, 96);
-        opacity: 1.0;
-        cursor: help;
-    }
-
-.tableheaderHelp2
-    {
-        color: rgb(186, 226, 255);
-        font-family: "UI-Light", Arial, Helvetica, sans-serif;
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        font-weight: bold;
-        opacity: 0.5;
-    }
-
-.tableheaderHelp2:hover
-    {
-        color: rgb(255, 185, 33);
-        opacity: 1.0;
-        cursor: pointer;
-    }
-
-
-.hidden {
-    opacity: 0;
-    pointer-events: none;
+    min-height: 50px; /* Adjusted min-height for mini */
+    /* border: 0px solid pink; */
+    background-color: var(--neutral-1);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.4em 0.6em; /* Adjusted padding */
 }
 
+/* Table header text styling consistent with spx_layout.css, adjusted for mini */
+.tableheaderText {
+    color: var(--brand-primary);
+    font-family: "UI-Light", Arial, Helvetica, sans-serif;
+    font-size: 0.8em; /* Adjusted size */
+    text-transform: uppercase;
+    letter-spacing: 1px; /* Adjusted spacing */
+    font-weight: bold;
+}
+.tableheaderHelp, .tableheaderHelp2 {
+    color: var(--brand-primary);
+    font-family: "UI-Light", Arial, Helvetica, sans-serif;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    font-weight: bold;
+    opacity: 0.7;
+    transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+.tableheaderHelp:hover {
+    color: var(--accent-warning);
+    opacity: 1.0;
+    cursor: help;
+}
+.tableheaderHelp2 { color: var(--text-secondary); }
+.tableheaderHelp2:hover {
+    color: var(--brand-primary);
+    opacity: 1.0;
+    cursor: pointer;
+}
 
+.hidden { /* Consistent with spx_layout.css */
+    opacity: 0 !important; /* Ensure it's truly hidden but exists for JS */
+    pointer-events: none !important;
+    position: absolute !important; /* Take out of flow */
+    /* display: none !important; */ /* display:none can break transitions */
+}
+
+/* Home icon styling consistent with spx_layout.css, adjusted for mini */
 .home-icon{
-    font-size: 1.2em;
-    color: #B9BDC2;
-    margin-left: 20px;
-    margin-right: 5px;
+    font-size: 1.1em; /* Adjusted size */
+    color: var(--text-secondary);
+    margin-left: 10px; /* Adjusted margin */
+    margin-right: 3px; /* Adjusted margin */
+    transition: color 0.2s ease-in-out;
 }
+.home-icon:hover { color: var(--brand-primary); }
 
+/* Instruction styling consistent with spx_layout.css, adjusted for mini */
 .instruction{
-    font-size:          0.6em;
-    color:              #a7abad;
-    line-height:        1.4em;
-    border-left:        1px solid #036a9e;
-    padding:            0.5em 0.2em 0.5em 1em;
-    margin-top:         0.5em;
-    margin-bottom:      0.5em;
-    background-color:   rgba(0, 0, 0, 0.2);
+    font-size: 0.8em; /* Adjusted size */
+    color: var(--text-secondary);
+    line-height: 1.4em;
+    border-left: 2px solid var(--brand-primary);
+    padding: 0.5em 0.7em; /* Adjusted padding */
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    background-color: var(--neutral-1);
+    border-radius: 3px;
 }
 
-
-
-
-
-
+/* Truncate styling consistent with spx_layout.css */
 .truncate{
     margin-top: 0.2em;
     margin-bottom: 0.3em;
@@ -582,567 +534,265 @@ div.curfolder{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    opacity: 0.5;
-  }
+    opacity: 0.8;
+    color: var(--text-secondary);
+}
 
-
-
+/* Left/Right panel styling consistent with spx_layout.css, if used in mini */
 .left {
-    width: 60%;
-    height: 100%;
-    float: left;
-    overflow: auto;
-    border: 0px solid salmon;
-    }
-
-
-.l-icon {
-    margin-top: 0.7em;
-    }
-
-.l-icon:hover {
-    color: orange;
-    }
-
-
-
-.message{
-    padding: 10px;
-    background-color: rgba(125, 226, 159, 0.363);
-    color: white;
-    border-radius: 6px;
-    text-align: center;
-    font-size: 0.7rem;
-    margin-bottom: 30px;
+    width: 60%; height: 100%; float: left; overflow: auto; padding-right: 0.5em;
 }
-
-
-.messagerror{
-    padding: 10px;
-    background-color: rgba(221, 82, 27, 0.363);
-    color: white;
-    border-radius: 6px;
-    text-align: center;
-    font-size: 0.7rem;
-    margin-bottom: 30px;
-}
-
-
-.over {
-    background-color: pink !important;
-}
-
-
-.pM {
-        padding: 10px;
-    }
-
-    
-.playFalse
-    {
-        /*FIXME: This is not super clever... See view-controller play icon logic...*/
-        opacity: 0 !important; 
-        color:green;
-    }
-
-
-.playTrue
-    {
-        /*FIXME: This is not super clever... See view-controller play icon logic...*/
-        opacity: 1 !important;
-        color:green;
-    }
-
-.playAuto
-    {
-        /*FIXME: This is not super clever... See view-controller play icon logic...*/
-        opacity: 1 !important;
-        color:green !important;
-        border-right: 3px solid green;
-    }
-
-
-.rendererMini
-    {
-        background-image: url('/img/checker60.png'); /* bgimage for local preview */
-        background-size: 10vw;
-        aspect-ratio: 16/9;
-        flex-shrink: 0;
-    }
-
 .right {
-    margin-left: 60%;
-    height: 100%;
-    overflow: auto;
-    border: 0px solid blueviolet;
-    }
+    margin-left: 60%; height: 100%; overflow: auto; padding-left: 0.5em;
+}
 
+/* l-icon styling consistent with spx_layout.css */
+.l-icon {
+    margin-top: 0.5em; /* Adjusted margin */
+    color: var(--text-secondary);
+    transition: color 0.2s ease-in-out;
+    font-size: 0.9em; /* Ensure icons are not too large */
+}
+.l-icon:hover { color: var(--brand-primary); }
 
+/* Message styling consistent with spx_layout.css, adjusted for mini */
+.message{ /* Success messages */
+    padding: 0.8em 1em; /* Adjusted padding */
+    background-color: var(--brand-primary-darker);
+    color: var(--text-primary);
+    border-radius: 4px; /* Consistent rounding */
+    text-align: center;
+    font-size: 0.8em; /* Adjusted size */
+    margin-bottom: 1em; /* Adjusted margin */
+    border: 1px solid var(--brand-primary);
+}
+.messagerror{ /* Error messages */
+    padding: 0.8em 1em;
+    background-color: var(--accent-error);
+    color: var(--text-primary);
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.8em;
+    margin-bottom: 1em;
+    border: 1px solid darken(var(--accent-error), 10%);
+}
 
+/* Over state consistent with spx_layout.css */
+.over {
+    background-color: var(--brand-primary-darker) !important;
+    outline: 2px dashed var(--brand-primary);
+}
+
+.pM { padding: 8px; } /* Slightly reduced padding for mini */
+
+/* Play state icons consistent with spx_layout.css */
+.playFalse { opacity: 0.5 !important; color: var(--text-secondary); }
+.playTrue { opacity: 1 !important; color: var(--brand-primary); }
+.playAuto { opacity: 1 !important; color: var(--brand-primary) !important; border-right: 3px solid var(--brand-primary); }
+
+/* RendererMini specific styling */
+.rendererMini {
+    background-image: url('/img/checker60.png');
+    background-size: 20px 20px; /* Smaller checker pattern */
+    aspect-ratio: 16/9;
+    flex-shrink: 0;
+    border: 1px solid var(--border-color); /* Add border */
+    border-radius: 4px; /* Add rounding */
+}
+
+/* Row head styling consistent with spx_layout.css, adjusted for mini */
 .rowhead {
-    margin: auto 1px auto 1px;
+    margin: auto 1px;
     vertical-align: middle;
-    color: white;
-    font-family: "UI-Black", Arial, Helvetica, sans-serif;
-    font-size: 0.85em;
-    line-height: 2em;
-    padding-left: 5px;
-    padding-right: 5px;
+    color: var(--text-primary);
+    font-family: "UI-Bold", Arial, Helvetica, sans-serif;
+    font-size: 0.9em; /* Adjusted size */
+    line-height: 1.8em; /* Adjusted line height */
+    padding: 0.3em 0.5em; /* Adjusted padding */
+    background-color: var(--neutral-2);
 }
 
-.serverIndicator {
-    cursor: pointer;
-}
+/* Server indicator styling consistent with spx_layout.css */
+.serverIndicator { cursor: pointer; color: var(--text-secondary); transition: color 0.2s ease-in-out; }
+.serverIndicator:hover { color: var(--brand-primary); }
+.disabledServer { text-decoration: line-through; opacity: 0.5; color: var(--text-secondary); }
 
-.serverIndicator:hover {
-    color: orange;
-}
-
-.disabledServer {
-    text-decoration: line-through;
-    opacity: 0.4;
-    color: black;
-}
-
-
-
-
-    
+/* Server button styling consistent with spx_layout.css, adjusted for mini */
 .serverbtn {
-        background-color: rgba(0, 0, 0, 0);
-        font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-        padding: 0.3em 0.8em;
-        border-radius: 0px;
-        font-size: 0.8em;
-        margin: 0px;
-        color: white;
-        cursor: default;
-    }
-
-.spacer {
-    /* empty span between UI controls, spacer ftype */
-    display: block; 
-    background-color: green;
-    height: 1em;
-}
-
-.spxFlexContainer {
-    display: flex; /* flex or inline-flex */
-    justify-content: center;
-    align-content: stretch;
-    padding: 0.0em;
-    border: 0px solid yellow;
-    margin: 0px;
-    gap: 2px;
-}
-
-.spxFlexItem {
-    flex: auto;
-    white-space: nowrap;
-    padding: 0px 0px 0px 0px;
-    margin: 0px;
-}
-
-.spxMainPanel {
-    height: 55vw;
-    display: table;
-    width: 100%;
-    max-width: 2000px;
-    text-align: center;
-    border: 0px solid yellow;
-    border-collapse: separate;
-    border-spacing: 2px;
-    margin: auto;
-}
-
-.spxTopRow {
-    display: table-row;
-    height: 4em;
-    color: white;
-    border: 1px solid red !important;
+    background-color: transparent;
     font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-}
-
-.spxBottomRow {
-    display: table-row;
-    height: 12.5em;
-    /* background: rgb(9, 36, 9); */
-    color: beige;
-    vertical-align: middle;
-}
-
-.spxMainSection {
-    height: 100%;
-    display: table-cell;
-    width: 100%;
-    vertical-align: middle;
-    border: 0px solid green;
-}
-
-.spxTableRow {
-    height: 100%;
-    display: table-row;
-    width: 100%;
-    vertical-align: middle;
-    border: 0px solid green;
-}
-
-.spxCell {
-    display: table-cell;
-    vertical-align: middle;
-    margin: 10px !important;
-    text-align: left;
-    padding: 10px;
-}
-
-.spxPanelL {
-    width: 50%;
-    color: white;
-}
-
-.spxPanelC {
-    width: 0.1em;
-    /* background: red; */
-    color: white;
-}
-
-.spxPanelR {
-    color: white;
-    border-left: 2px solid grey;
-    margin-left: 10px;
-}
-
-.spxTableHead {
-    color: white;
-    text-transform: uppercase;
-    font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    text-shadow: rgba(255, 255, 255, 0.1) 0 0 2px;
-    line-height: 2em;
-    font-size: 0.75em;
-    margin: auto auto;
-    border: 0px solid pink;
-}
-
-.spxConfigHead {
-    color: rgba(255, 255, 255, 0.52);
-    font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    text-shadow: rgba(255, 255, 255, 0.1) 0 0 2px;
-    /* line-height:   2em; */
-    font-size: 0.75em;
-    margin: auto auto;
-    border: 0px solid pink;
-    white-space: nowrap;
-}
-
-.prvar {
-    color: rgba(255, 255, 255, 0.2);
-    font-family: monospace;
-    float: right;
-    padding-right: 1em;
-}
-
-.spxInfotext {
-    font-size: 0.6em;
-    font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    opacity: 0.7;
-    line-height: 120%;
-}
-
-.spxInfoRegtext {
-    font-size: 0.7em;
-    color:rgb(198, 198, 198);
-    font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-}
-
-.spxTableHeadsmall {
-    font-size: 0.6em;
-    font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    text-shadow: rgba(255, 255, 255, 0.5) 0 0 2px;
-    opacity: 0.75;
-    line-height: 1; /* 75%; */
-}
-
-
-.footer {
-    height: 32px;
-    border: 0px solid orange;
-    margin: 8px 10px 4px 10px;
-    padding: 8px 10px;
-  }
-
-
-table.footerTable, td.footerTable, tr.footerTable, span.statusbar div.footerTable{
-    padding: 0px;
-    margin: 0px;
-    line-height: 16px;
-    font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    font-size:  14px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-
-
-.statusbar
-    {
-    color:      #aaaaaa;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size:  100%;
-    padding:    3px 3px;
-    }
-
-.statusBarWarn
-    {
-    color:      #ffb95d;
-    }
-
-.statusBarWarn::before
-    {
-    font-family: "FontAwesomeSol900";
-    content:    "\f071";
-    color: rgb(230, 137, 16);
-    font-size: 60%;
-    margin-right: 6px;
-    }
-
-
-
-.statusBarError
-    {
-    background-color: rgba(124, 9, 9, 0.808);
-    color:      #f3ebeb;
-    }
-
-.statusBarError::before
-    {
-    font-family: "FontAwesomeSol900";
-    content:    "\f071";
-    color: rgb(230, 226, 16);
-    font-size: 60%;
-    margin-right: 6px;
-    }
-
-.tooltipzone {
-    position: relative;
-    display: inline-block;
-}
-
-.tooltipzone .tooltip {
-    visibility: hidden;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 0.1em 0.7em;
-    font-size: 0.9em;
-    opacity: 0;
-    position: absolute;
-    z-index: 1;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, 10px);
-    transition: opacity 1.5s;
-}
-
-.tooltipzone:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
-}
-
-
-.vtop{
-    vertical-align: top;
-}
-
-.vmid{
-    vertical-align: middle;
-}
-
-
-.wide
-    {
-    width: 100% !important;
-    }
-
-.w50
-    {
-    width: 49% !important;
-    }
-
-.welcome {
-    margin-top:     0.7em;
-    font-family:    Arial, Helvetica, sans-serif;
-    margin-left:    3em;
-    margin-right:   3em;
-    font-size:      0.9em;
-    color:          #cfcfcf;
-    line-height:    1.3em;
-    
-}
-
-.working
-    {
-    background-color: rgb(255, 136, 0);
-    border-radius: 3px;
-    padding: 1px 8px;
-    font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    font-size: 0.85em;
-    text-shadow: rgba(0, 0, 0, 1.0) 0 0 6px;
-    color: white;
-    margin-left: 1.5em;
-    }
-
-
-
-
-.inFocus {
-    border-top: 2px solid rgba(187, 164, 60, 0.746) !important;
-    border-right: 2px solid rgba(141, 122, 13, 0.431) !important;
-    border-bottom: 2px solid rgba(158, 120, 14, 0.527) !important;
-    transition: background-color 0.2s, border-left 0.3s, box-shadow 0.6s;
-    background-color: rgba(0, 0, 0, 0.1);
-    box-shadow: rgba(156, 119, 50, 0.3) 0px 0px 10px;
-}
-
-.inFocus:hover {
-    transition: background-color 0.2s, border-left 0.3s;
-    background-color: rgba(0, 0, 0, 0.1);
-    box-shadow: rgba(218, 112, 13, 0.657) 0px 0px 10px;
-    border-width: 2px 2px 2px 15px;
-}
-
-#messageSlider {
-    top: 0px;
-    left: 50%;
-    opacity: 0; /* animated */
-    display: flex;
-    z-index: 1000;
-    min-width: 10%;
-    font-size: 0.8em;
-    position: absolute;
-    padding: 0.5em 2em;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0 0 1em 1em;
-    transform: translateX('-100%');
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.happyMsg {
-    background-color: rgba(20, 116, 68, 0.76);
-    box-shadow: rgba(0, 0, 0, 0.4) 0 2px 10px;    
-}
-
-.infoMsg {
-    background-color: rgba(0, 0, 0, 0.4);
-    box-shadow: rgba(0, 0, 0, 0.4) 0 2px 10px;    
-}
-
-.warnMsg {
-    background-color: rgba(143, 81, 0, 0.794);
-    box-shadow: rgba(0, 0, 0, 0.4) 0 2px 10px;    
-}
-
-.errorMsg {
-    background-color: rgba(82, 6, 6, 0.705);
-    box-shadow: rgba(0, 0, 0, 0.4) 0 2px 10px;    
-}
-
-
-.collapsibleZone {
-    width: 100%;
-    border: 0px;
-    outline: none;
-    padding: 0.4em;
+    padding: 0.4em 0.8em; /* Adjusted padding */
+    border-radius: 4px;
+    font-size: 0.8em; /* Adjusted size */
+    margin: 0px 2px;
+    color: var(--text-primary);
     cursor: pointer;
-    text-align: left;
-    font-size: 0.6rem;
-    box-sizing: border-box;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.0);
-    background-color: rgba(0, 0, 0, 0.2);
-  }
+    border: 1px solid var(--border-color);
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+.serverbtn:hover {
+    background-color: var(--neutral-2);
+    border-color: var(--brand-primary);
+}
 
+/* Spacer consistent with spx_layout.css */
+.spacer { display: block; background-color: transparent; height: 1em; }
+
+/* SPX Flex container and item styling consistent with spx_layout.css */
+.spxFlexContainer { display: flex; justify-content: center; align-content: stretch; padding: 0; margin: 0; gap: 4px; /* Adjusted gap */ }
+.spxFlexItem { flex: auto; white-space: nowrap; padding: 0; margin: 0; }
+
+/* SPX Main Panel and related elements - apply modern theme, adjust for mini */
+/* These might need significant refactor for true modern feel if not using table display */
+.spxMainPanel { /* Consistent with spx_layout.css, but might be simpler in mini */
+    min-height: auto; /* Allow natural height for mini */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: none; /* No max-width for mini if it's meant to be compact */
+    text-align: left; /* Default to left align for content */
+    border-collapse: separate;
+    border-spacing: 3px; /* Adjusted spacing */
+    margin: auto;
+    background-color: var(--neutral-1);
+    padding: 0.5em; /* Reduced padding */
+    border-radius: 6px; /* Slightly less rounding */
+}
+.spxTopRow, .spxBottomRow, .spxMainSection, .spxTableRow, .spxCell { /* Simplify for mini if possible */
+    /* Apply color variables and basic modernizations */
+    color: var(--text-primary);
+    padding: 0.3em; /* Reduced padding */
+    border: none; /* Remove internal borders for cleaner look */
+}
+.spxTopRow { border-bottom: 1px solid var(--border-color); }
+.spxBottomRow { color: var(--text-secondary); }
+.spxCell { background-color: var(--neutral-2); border-radius: 3px; }
+.spxPanelL, .spxPanelR, .spxPanelC { color: var(--text-primary); padding: 0.3em; }
+.spxPanelL { width: 50%; }
+.spxPanelC { width: 1px; background: var(--border-color); margin: 0 0.3em; }
+.spxPanelR { margin-left: 0; }
+
+/* SPX Table Head and Config Head styling consistent with spx_layout.css, adjusted for mini */
+.spxTableHead {
+    color: var(--brand-primary); text-transform: uppercase; font-family: "UI-Bold", Arial, Helvetica, sans-serif;
+    text-shadow: none; line-height: 1.8em; font-size: 0.85em; margin: auto; padding-bottom: 0.3em;
+}
+.spxConfigHead {
+    color: var(--text-secondary); font-family: "UI-Regular"; text-shadow: none;
+    font-size: 0.8em; margin: auto; white-space: nowrap;
+}
+.prvar { /* Consistent with spx_layout.css */
+    color: var(--text-secondary); font-family: "Courier New", Courier, monospace; float: right;
+    padding: 0.1em 0.3em; background-color: var(--neutral-2); border-radius: 3px; font-size: 0.9em;
+}
+.spxInfotext, .spxInfoRegtext, .spxTableHeadsmall { /* Consistent with spx_layout.css, adjusted for mini */
+    font-size: 0.75em; color: var(--text-secondary); opacity: 0.8; line-height: 1.3;
+}
+.spxTableHeadsmall { font-size: 0.7em; text-transform: uppercase; }
+
+/* Footer and statusbar styling consistent with spx_layout.css, ensure fits mini */
+.footer { /* Already styled above with #footer */ }
+table.footerTable, td.footerTable, tr.footerTable, span.statusbar div.footerTable{
+    padding: 0; margin: 0; line-height: 1.2; font-family: "UI-Regular", Arial, Helvetica, sans-serif;
+    font-size:  0.85em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-secondary);
+}
+.statusbar { color: var(--text-secondary); font-size:  0.9em; padding: 2px; }
+.statusBarWarn { color: var(--accent-warning); font-weight: bold; }
+.statusBarWarn::before { font-family: "FontAwesomeSol900"; content: "\f071"; color: var(--accent-warning); font-size: 80%; margin-right: 5px; }
+.statusBarError { background-color: var(--accent-error); color: var(--text-primary); padding: 0.2em 0.4em; border-radius: 3px; }
+.statusBarError::before { font-family: "FontAwesomeSol900"; content: "\f071"; color: var(--text-primary); font-size: 80%; margin-right: 5px; }
+
+/* Tooltip styling consistent with spx_layout.css, ensure readable in mini */
+.tooltipzone { position: relative; display: inline-block; }
+.tooltipzone .tooltip {
+    visibility: hidden; background-color: var(--neutral-1); color: var(--text-primary); text-align: center;
+    border-radius: 3px; padding: 0.3em 0.6em; font-size: 0.8em; opacity: 0;
+    position: absolute; z-index: 1002; top: 110%; left: 50%; transform: translateX(-50%);
+    transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out; box-shadow: 0 1px 4px rgba(0,0,0,0.2); white-space: nowrap;
+}
+.tooltipzone:hover .tooltip { visibility: visible; opacity: 1; }
+
+.vtop{ vertical-align: top; }
+.vmid{ vertical-align: middle; }
+
+.wide { width: 100% !important; }
+.w50 { width: 49% !important; } /* Consider gap if using flex/grid */
+
+/* Welcome message styling consistent with spx_layout.css, adjusted for mini */
+.welcome {
+    margin-top: 0.5em; font-family: "UI-Light", Arial, Helvetica, sans-serif; margin-left: auto; margin-right: auto;
+    max-width: 90%; padding: 0.8em 1em; font-size: 0.9em; color: var(--text-secondary);
+    line-height: 1.5em; text-align: center; background-color: var(--neutral-1); border-radius: 6px;
+}
+
+/* Working indicator styling consistent with spx_layout.css */
+.working {
+    background-color: var(--accent-warning); border-radius: 3px; padding: 1px 8px;
+    font-family: "UI-Regular", Arial, Helvetica, sans-serif; font-size: 0.8em; text-shadow: none;
+    color: #000000; margin-left: 1em;
+}
+
+/* inFocus styling consistent with spx_layout.css */
+.inFocus {
+    background-color: var(--neutral-1); border: 1px solid var(--brand-primary);
+    border-left: 4px solid var(--brand-primary); box-shadow: 0 0 6px rgba(85, 187, 75, 0.25); /* Softer glow */
+    color: var(--text-primary);
+    /* transition already defined in .itemrow */
+}
+.inFocus:hover {
+    background-color: var(--neutral-1); border-left-color: var(--brand-primary);
+    box-shadow: 0 0 8px rgba(85, 187, 75, 0.35);
+    /* border-width: 1px 1px 1px 4px; */ /* Keep consistent border width */
+}
+
+/* Message slider styling consistent with spx_layout.css */
+#messageSlider { /* Ensure this is fixed for global messages if used in mini layout */
+    top: 5px; left: 50%; transform: translateX(-50%); opacity: 0; display: flex; z-index: 2000;
+    min-width: 200px; font-size: 0.85em; position: fixed; padding: 0.6em 1.2em;
+    align-items: center; justify-content: center; border-radius: 4px; color: var(--text-primary);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2); transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+.happyMsg { background-color: var(--brand-primary); }
+.infoMsg { background-color: var(--neutral-3); color: var(--text-primary); }
+.warnMsg { background-color: var(--accent-warning); color: #000000; }
+.errorMsg { background-color: var(--accent-error); color: var(--text-primary); }
+
+/* Collapsible zone styling consistent with spx_layout.css, adjusted for mini */
+.collapsibleZone {
+    width: 100%; border: none; outline: none; padding: 0.5em 0.7em; cursor: pointer;
+    text-align: left; font-size: 0.8em; box-sizing: border-box; text-transform: uppercase;
+    color: var(--text-secondary); background-color: var(--neutral-2); border-radius: 3px;
+    margin-bottom: 4px; transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
 .collapsibleZone::before{
-    content: "\25B6";
-    color: white;
-    display: inline-block;
-    margin-right: 12px;
-    transform: rotate(0deg) scale(0.7);
-    transition: transform 0.3s ease-in-out;
+    content: "\25B6"; color: var(--text-secondary); display: inline-block; margin-right: 8px;
+    transform: rotate(0deg) scale(0.8); transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
 }
+.collapsibleZone:hover { color: var(--text-primary); background-color: var(--neutral-3); }
+.collapsibleZone:hover::before { color: var(--brand-primary); }
+.activeZone { color: var(--text-primary); background-color: var(--brand-primary-darker); }
+.activeZone::before{ color: var(--text-primary); transform: rotate(90deg) scale(0.9); }
 
-.collapsibleZone:hover {
-    color: rgba(255, 255, 255, 1.0);
-    transition: all 0.3s ease-in-out;
-    background-color: rgba(255, 255, 255, 0.2);
-}
+/* Edge program/preview styling consistent with spx_layout.css */
+.edge_program { border-right: 4px solid var(--brand-primary); } /* Thinner edge for mini */
+.edge_preview { border-right: 4px solid var(--accent-error); }
 
-.activeZone {
-    color: rgba(255, 255, 255, 1.0);
-    background-color: rgba(255, 255, 255, 0.2);
-}
+/* Close promo styling consistent with spx_layout.css */
+.closePromo { color: var(--text-secondary); transition: all 200ms ease-in-out; font-size: 1.2em; /* Ensure clickable */ }
+.closePromo:hover { transform: rotate(90deg) scale(1.1); color: var(--brand-primary); }
 
-       
-.activeZone::before{
-    content: "\25B6";
-    color: white;
-    display: inline-block;
-    /* margin-right: 12px; */
-    transform: rotate(90deg)  scale(1.0);
-    transition: transform 0.3s ease-in-out;
-}
+.wrap { white-space: normal; }
 
-.edge_program {
-    border-right: solid rgba(20, 138, 50, 0.582) 6px;
-}
-
-.edge_preview {
-    border-right: solid rgba(177, 24, 24, 0.7) 6px;
-}
-
-.closePromo {
-    transition: all 200ms ease-in-out;
-}
-
-.closePromo:hover {
-    transform: rotate(90deg);
-}
-
-.wrap {
-    white-space: normal;
-}
-
+/* Rundown options collapsible styling consistent with spx_layout.css, adjusted for mini */
 #rdOptionsCollapsible {
-    display: none; /* controlled */
-    box-sizing: border-box;
-    padding: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
-    font-size: 0.5rem;
-    background-color: rgba(0,0,0,0.1);
-    border-radius: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .RDoptionsText {
-    color: white;
-    border: 2px solid transparent;
-    margin-left: 0.1em;
-    margin-right: 0.1em;
-    text-shadow: rgb(0, 0, 0, 0.4) 0 0px 8px;
-    padding-inline-start: 5px;
-    font-size: 0.8em;
-    font-family: "UI-Light", Arial, Helvetica, sans-serif;
+    display: none; box-sizing: border-box; padding: 0.4em; max-height: 0; overflow: hidden;
+    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out; font-size: 0.75em;
+    background-color: var(--neutral-1); border-radius: 0.4rem; margin-bottom: 0.4rem;
+    border: 1px solid var(--border-color);
 }
+.RDoptionsText { /* Consistent with spx_forms.css, ensure it's applied correctly */
+    color: var(--text-primary); background-color: var(--neutral-2); border: 1px solid var(--border-color);
+    border-radius: 3px; margin: 0.1em; text-shadow: none; padding: 0.4em 0.5em;
+    font-size: 0.9em; font-family: "UI-Light", Arial, Helvetica, sans-serif; width: calc(100% - 0.2em);
+}
+.RDoptionsText::placeholder { color: var(--text-secondary); font-style: italic; font-size: inherit; }

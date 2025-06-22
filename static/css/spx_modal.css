@@ -1,461 +1,388 @@
 /*
   Copyright 2020 Softpix
+  Updated for modern look with CSS variables.
 */
 
-/* TABS in import template dialog */
-/* Style the tab */
-
+/* Using CSS variables defined in spx_colors.css */
 :root {
-  --tabButtonBorderColor: #afb5ba;
-  --backgroundColor: #2d333b;
+  /* --tabButtonBorderColor: #afb5ba; // Replaced with var(--border-color) or similar */
+  /* --backgroundColor: #2d333b; // Replaced with var(--neutral-1) or similar */
 }
-
 
 .promoBoxCols {
   display: flex;
   flex-direction: row;
   gap: 1.5em;
+  color: var(--text-secondary); /* Promo text color */
 }
 
 .promoLeft {
   flex-basis: 60%;
   position: relative;
-  font-family: 'UI-Light' !important;
-  font-size: 0.7em;
+  font-family: 'UI-Light', Arial, Helvetica, sans-serif !important; /* Ensure font consistency */
+  font-size: 0.9em; /* Slightly larger for readability */
 }
 
 .promoBoxHead {
-  font-size: 1.5em;
+  font-size: 1.6em; /* Larger heading */
   margin-bottom: 0.7em;
+  color: var(--text-primary); /* Primary text for heading */
 }
 
 .promoLeft p {
   margin-top: 0.5em;
-  opacity: 0.7;
+  opacity: 0.8; /* More visible */
+  line-height: 1.5; /* Improved line height */
 }
 
 .promoLeft a {
-  color: orange;
+  color: var(--brand-primary); /* Brand color for links */
   text-decoration: none;
+  transition: color 0.2s ease-in-out;
 }
-
 .promoLeft a:hover {
-  color: white;
+  color: var(--brand-primary-darker); /* Darker brand on hover */
 }
-
-
 
 .promoLeft h2 {
-  font-size: 1.4em;
-  margin-top: 2.0em;
+  font-size: 1.3em; /* Adjusted size */
+  margin-top: 1.5em; /* Adjusted margin */
   margin-bottom: 0.5em;
   text-transform: none;
-  color: white;
+  color: var(--text-primary);
   width: 100%;
   font-weight: normal;
   letter-spacing: normal;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.242);
+  border-bottom: 1px solid var(--border-color); /* Use variable */
 }
 
 .promoLeft li {
-  list-style: square;
+  list-style: disc; /* More common list style */
   color: inherit;
   opacity: inherit;
+  margin-left: 1.2em; /* Add some indent */
 }
 
 .promoRight {
-  font-size: 0.8em;
+  font-size: 0.9em; /* Consistent font size */
   flex-basis: 40%;
   position: relative;
 }
-
 .promoRight img {
-  width: 80%;
+  width: 100%; /* Make image responsive within its container */
+  max-width: 300px; /* Max width for image */
   height: auto;
+  border-radius: 4px; /* Add rounding to images */
 }
-
 
 .tabButtonRow {
   width: 100%;
   display: flex;
-  gap: 0.6em;
-  font-size: 0.8em;
-  padding: 1.5em 0.3em 0 0.3em;
+  gap: 0.5em; /* Slightly reduced gap */
+  font-size: 0.9em; /* Adjusted base size for tabs */
+  padding: 1em 0.3em 0 0.3em; /* Adjusted padding */
   flex-shrink: 0;
-  border-bottom: 1px solid var(--tabButtonBorderColor);
+  border-bottom: 1px solid var(--border-color); /* Use variable */
 }
-
-.tabButtonRow > div {
+.tabButtonRow > div { /* For alignment within the row if needed */
   flex-grow: 1;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
 
-/* Style the buttons that are used to open the tab content */
 .tabButtonRow button {
-  background-color: inherit;
-  float: left;
-  border: none;
+  background-color: transparent; /* Transparent background for inactive tabs */
+  float: left; /* Consider removing floats if parent is flex */
+  border: 1px solid transparent; /* Start with transparent border */
+  border-bottom: none; /* No bottom border for inactive */
   outline: none;
   cursor: pointer;
-  padding: 0.4em 1.0em;
-  transition: 0.1s;
-  font-family: inherit;
-  border-radius: 0.3em 0.3em 0 0;
+  padding: 0.5em 1.2em; /* Adjusted padding */
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  font-family: "UI-Regular", Arial, Helvetica, sans-serif; /* Consistent font */
+  border-radius: 4px 4px 0 0; /* Round top corners */
   position: relative;
-  transform: translateY(1px);
+  transform: translateY(1px); /* To align with bottom border of row */
   z-index: 10;
-  margin-right: 0.4em;
-  color: rgba(255, 255, 255, 0.385);
-  border: 0px solid var(--tabButtonBorderColor);
-  border-width: 1px 1px 0px 1px;
+  margin-right: 0.3em; /* Adjusted margin */
+  color: var(--text-secondary); /* Secondary text for inactive tabs */
 }
-
-/* Change background color of buttons on hover */
 .tabButtonRow button:hover {
-  background-color: rgba(194, 194, 194, 0.426);
-  color: black;
+  background-color: var(--neutral-2); /* Subtle hover */
+  color: var(--text-primary);
+  border-color: var(--border-color); /* Show border on hover */
+  border-bottom: none;
+}
+.tabButtonRow button.active, .tabSelected { /* Active tab style */
+  background-color: var(--neutral-1) !important; /* Use neutral for active tab background */
+  color: var(--brand-primary) !important; /* Brand color for active tab text */
+  border-color: var(--border-color) !important;
+  border-bottom: 1px solid var(--neutral-1) !important; /* Make bottom border match bg to connect with content */
+  font-weight: bold; /* Bold text for active tab */
 }
 
-/* Create an active/current tablink class */
-.tabButtonRow button.active {
-  background-color: #ccc;
-}
-
-.tabSelected {
-  background-color: #b1b6bc !important;
-  color: rgb(32, 32, 32) !important;
-  border-radius: 0.3em 0.3em 0 0;
-}
-
-/* Style the tab content */
 .tabcontent {
-  display: none;
-  padding: 0.5em;
-  border: 0px solid #ccc;
-  border-top: none;
+  display: none; /* Controlled by JS */
+  padding: 1em; /* Add padding to tab content */
+  /* border: 1px solid var(--border-color); */ /* Border on modal instead of each tab content */
+  /* border-top: none; */
+  background-color: var(--neutral-1); /* Background for tab content area */
+  border-radius: 0 0 4px 4px; /* Round bottom corners if tabs are on top */
 }
-
-#tab1,
-#tab2,
-#tab3,
-#tab4 {
-  padding: 0.5em;
+#tab1, #tab2, #tab3, #tab4 { /* Ensure consistent styling for all tab panels */
+  padding: 1em; /* Consistent padding */
   display: flex;
   flex-direction: column;
-  border: 0px solid blue;
+  /* border: 0px solid blue; */ /* Removed debug border */
   height: 100%;
   overflow: auto;
-  /* background-color: var(--backgroundColor); */
 }
-
-#tab2,
-#tab3,
-#tab4 {
-  padding: 1.5em;
-}
-
-
-
 
 .dialogHeaderBar {
   display: flex;
   flex-direction: row;
   align-items: center;
   position: relative;
-  padding: 0.2em 0.5em;
-  font-size: 0.8em;
-  background-color: rgba(255,255,255,0.2);
-  color: white;
-  border-bottom: 1px solid #3c3c3c;
+  padding: 0.5em 0.8em; /* Adjusted padding */
+  font-size: 1em; /* Larger font for header */
+  background-color: var(--neutral-2); /* Use neutral for header */
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color); /* Use variable */
+  border-radius: 4px 4px 0 0; /* Round top corners of dialog */
 }
-
 .dialogHeaderBarClose {
   display: flex;
   flex-grow: 1;
   justify-content: flex-end;
 }
-
 .dialogCloseButton {
   cursor: pointer;
-  font-size: 1.5em;
+  font-size: 1.3em; /* Adjusted size */
+  color: var(--text-secondary); /* Secondary color for close button */
+  transition: color 0.2s ease-in-out;
 }
-
 .dialogCloseButton:hover {
-  color: rgba(0, 0, 0, 0.5);
+  color: var(--brand-primary); /* Brand color on hover */
 }
 
-.addTemplateItem{
-  background-color: rgba(255,255,255,0.05);
+.addTemplateItem{ /* Style for items in "add template" list */
+  background-color: var(--neutral-2); /* Use neutral background */
   width:100%;
-  padding:10px;
-  margin-bottom:15px;
-  box-shadow: rgba(0, 0, 0, 0.7) 0px 0px 10px;
+  padding:12px; /* Adjusted padding */
+  margin-bottom:10px; /* Adjusted margin */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15); /* Softer shadow */
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
-
 .addTemplateItem:hover{
-  background-color: rgba(255,255,255,0.2);
+  background-color: var(--neutral-3); /* Lighter on hover */
+  border-color: var(--brand-primary);
   cursor: pointer;
 }
 
 .templateName{
   text-transform: uppercase;
+  color: var(--text-primary); /* Primary text for name */
+  font-weight: bold; /* Make name bold */
+  font-size: 0.9em;
 }
-
 .templateDesc{
-  font-size: 75%;
-  opacity: 0.6;
+  font-size: 0.8em; /* Adjusted size */
+  opacity: 0.7; /* More visible */
+  color: var(--text-secondary); /* Secondary text for description */
 }
 
+/* Collapsible sections consistent with spx_layout.css */
 .collapsible {
     box-sizing: border-box;
-    color: white;
+    color: var(--text-secondary);
     cursor: pointer;
-    padding: 12px;
+    padding: 0.8em 1em; /* Adjusted padding */
     width: 100%;
-    border-top: 0px;
-    border-right: 0px;
-    border-bottom: 1px solid black;
+    border: none;
+    border-bottom: 1px solid var(--border-color); /* Separator */
     text-align: left;
     outline: none;
-    font-size: 1rem;
+    font-size: 0.9rem; /* Adjusted size */
     text-transform: uppercase;
-  }
-
-  .collapsible::before{
+    background-color: var(--neutral-2);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+.collapsible::before{
     content: "\25B6";
-    color: white;
+    color: var(--text-secondary);
     display: inline-block;
-    margin-right: 12px;
-    transform: rotate(0deg) scale(0.7);
-    transition: transform 0.3s ease-in-out;
-  }
-
-
-  .globalCollapsible
-    {
-      font-size: 0.7rem;
-    }
-
-  .active, .collapsible:hover {
-    background-color: #375ea3;
-  }
-
-   
-  .active::before{
-    content: "\25B6";
-    color: white;
-    display: inline-block;
-    margin-right: 12px;
-    transform: rotate(90deg)  scale(1.0);
-    transition: transform 0.3s ease-in-out;
-  }
-
-
-  .collapsiblecontent {
+    margin-right: 10px;
+    transform: rotate(0deg) scale(0.8);
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+.globalCollapsible { font-size: 0.8rem; } /* Slightly smaller global collapsible */
+.active, .collapsible:hover {
+    background-color: var(--neutral-3); /* Lighter on hover/active */
+    color: var(--text-primary);
+}
+.active::before, .collapsible:hover::before {
+    color: var(--brand-primary); /* Brand color for icon */
+}
+.active::before{
+    transform: rotate(90deg)  scale(0.9);
+}
+.collapsiblecontent, .configGeneralContent {
     box-sizing: border-box;
-    padding: 0px 10px;
+    padding: 0.5em 1em; /* Padding for content */
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
-    font-size: 1rem;
-    background-color: rgba(0,0,0,0.1);
-  }
-
-  .configGeneralContent {
-    box-sizing: border-box;
-    padding: 0px 10px;
-    overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
-    font-size: 1rem;
-    background-color: rgba(0,0,0,0.1);
-  }
-
-
-
-/* Remove default bullets */
-ul, #myUL {
-list-style-type: none;
+    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+    font-size: 0.9rem;
+    background-color: var(--neutral-1); /* Background for content area */
+    border-bottom: 1px solid var(--border-color); /* Separator if content is visible */
 }
 
-/* Remove margins and padding from the parent ul */
-#myUL {
-margin: 0;
-padding: 0;
+/* Tree view styling */
+ul, #myUL { list-style-type: none; }
+#myUL { margin: 0; padding: 0; }
+.caret { cursor: pointer; user-select: none; }
+.caret::before { /* Style for tree caret */
+    content: "\25B6";
+    color: var(--text-secondary); /* Use secondary text for caret */
+    display: inline-block;
+    margin-right: 6px;
+    transition: transform 0.2s ease-in-out;
 }
+.caret-down::before { transform: rotate(90deg); }
+.nested { display: none; } /* Hidden by default */
+.opened { display: block; } /* Shown when parent is open */
 
-/* Style the caret/arrow */
-.caret {
-cursor: pointer;
-user-select: none; /* Prevent text selection */
-}
-
-/* Create the caret/arrow with a unicode, and style it */
-.caret::before {
-content: "\25B6";
-color: black;
-display: inline-block;
-margin-right: 6px;
-}
-
-/* Rotate the caret/arrow icon when clicked on (using JavaScript) */
-.caret-down::before {
-transform: rotate(90deg);
-}
-
-/* Hide the nested list */
-.nested {
-display: none;
-}
-
-/* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
-.opened {
-display: block;
-}
-
-
+/* Overlay and Modal styling */
 .overlay {
   position: fixed;
-  display: none;
+  display: none; /* Controlled by JS */
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(65, 76, 90, 0.9);
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Darker, more modern overlay */
   z-index: 900;
 }
-
-
 .modal {
-  width: 60%;
-  height: 90%;
+  width: clamp(300px, 70vw, 900px); /* Responsive width */
+  max-height: 85vh; /* Max height to prevent overflow */
   position: absolute;
-  left: 55%;
+  left: 50%; /* Center using transform */
   top: 50%;
   transform: translate(-50%, -50%);
-  z-index: 20;
-  padding: 0.3em;
-  background-color: #414C5A;
-  color: white;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 20px;
+  z-index: 901; /* Above overlay */
+  padding: 0; /* Remove padding, header/content will have it */
+  background-color: var(--neutral-1); /* Use neutral for modal background */
+  color: var(--text-primary);
+  box-shadow: 0 5px 25px rgba(0,0,0,0.3); /* Softer, larger shadow */
+  border-radius: 6px; /* Standard rounding */
+  display: flex; /* Use flex for modal structure */
+  flex-direction: column;
+  overflow: hidden; /* Prevent content from breaking rounded corners */
 }
 
-.icon::before {
-  font-family: "FontAwesomeSol900";
-  display: inline-block;
-  margin-right: 10px;
-  font-size: 1.2em;
-  -webkit-font-smoothing: antialiased;
+/* Icon font styling within modal (if used) */
+.icon::before { /* General icon styling */
+  font-family: "FontAwesomeSol900"; display: inline-block;
+  margin-right: 8px; font-size: 1.1em; -webkit-font-smoothing: antialiased;
 }
-
-.folder::before { content: "\f07b"; color: rgb(9, 119, 170);}
-.file::before { content: "\f15b"; color: rgb(241, 241, 237);}
+.folder::before { content: "\f07b"; color: var(--brand-primary); }
+.file::before { content: "\f15b"; color: var(--text-secondary); }
 .back::before { content: "\f106"; }
 .home::before { content: "\f102"; }
 
-.height1{
-  height: 1em;
-}
+/* Height utility classes - use with caution, prefer semantic classes */
+.height1{ height: 1em; } .height2{ height: 2em; }
+.height3{ height: 3em; } .height4{ height: 4em; }
 
-.height2{
-  height: 2em;
-}
-
-.height3{
-  height: 3em;
-}
-
-.height4{
-  height: 4em;
-}
-
-
-.modal_top{
+.modal_top{ /* Header of the modal */
   flex-shrink: 0;
-  border: 0px solid pink;
-  border-bottom: 1px dashed rgba(51, 150, 216, 0.445);
+  /* border: 0px solid pink; */ /* Removed debug border */
+  /* border-bottom: 1px dashed rgba(51, 150, 216, 0.445); */ /* Use solid border from .dialogHeaderBar */
+  padding: 0.8em 1em; /* Consistent padding with dialogHeaderBar */
+  font-size: 1.1em; /* Header text size */
+  background-color: var(--neutral-2); /* Consistent with dialogHeaderBar */
+  border-bottom: 1px solid var(--border-color);
+}
+.modal_top SPAN{ /* Text within modal header */
+  /* transform: translateY(-50%); */ /* May not be needed with flex alignment */
+  font-size: 0.9em; /* Relative to modal_top */
+  margin-left: 0; /* Remove margin if text is directly in modal_top */
 }
 
-.modal_top SPAN{
-  transform: translateY(-50%);
-  font-size: 0.8em;
-  margin-left: 1em;
-  }
-
-.modal_bottom{
-  gap: 0.5em;
+.modal_bottom{ /* Footer of the modal */
+  gap: 0.8em; /* Increased gap */
   width: 100%;
   flex-grow: 0;
   display: flex;
-  height: 2.5em;
+  min-height: 2.8em; /* Slightly taller */
   flex-shrink: 0;
-  padding-top: 0.3em;
+  padding: 0.8em 1em; /* Consistent padding */
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
-  border: 0px solid pink;
+  justify-content: flex-end; /* Align buttons to the right typically */
+  /* border: 0px solid pink; */
+  background-color: var(--neutral-2); /* Consistent background */
+  border-top: 1px solid var(--border-color); /* Separator */
+  border-radius: 0 0 4px 4px; /* Round bottom corners */
 }
-
-.browserMessage {
-  top: 0;
-  position: relative;
-  font-size: 0.6em;
-  color:  rgba(255, 255, 255, 0.5);
-  margin-left: 0.1em;
+.browserMessage { /* Message within modal footer */
+  font-size: 0.8em; /* Adjusted size */
+  color:  var(--text-secondary);
+  margin-right: auto; /* Push buttons to the right */
   user-select: none;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  border: 0px dotted pink;
+  /* border: 0px dotted pink; */
   height: 100%;
 }
-
-.modal_bottom > div > button {
-  border: 0px dotted white;
-  padding: 0.3em 1em;
-  margin-right: 0.2em;
+.modal_bottom > div > button { /* Buttons in modal footer */
+  /* border: 0px dotted white; */ /* Remove debug border */
+  /* Use .btn or .btnsmall styles from spx_forms.css for consistency */
+  padding: 0.5em 1em;
+  margin-right: 0; /* Remove specific margin, rely on gap */
 }
 
+/* Keyboard Help Table */
 .KBHelptable{
-    border-collapse:collapse; 
-	}
-
-.KBHelptable td{ 
-    padding:10px;
-    border:#4e95f4 0px solid;
-	}
-
+  border-collapse:collapse;
+  width: 100%; /* Make table take full width */
+  font-size: 0.9em; /* Adjust base font size */
+}
+.KBHelptable td, .KBHelptable th {
+  padding: 0.6em 0.8em; /* Consistent padding */
+  border: 1px solid var(--border-color); /* Add subtle borders */
+  text-align: left; /* Default left align */
+}
 .KBHelptable th{ 
-  background: rgba(0,0,0,0.5);
-  text-align: left;
-  padding: 7px;
+  background: var(--neutral-2); /* Use neutral for header */
+  color: var(--text-primary);
+  font-weight: bold; /* Make header text bold */
+}
+.KBHelptable tr:nth-child(odd){ 
+  background: var(--neutral-1); /* Slightly different for odd rows */
+}
+.KBHelptable tr:nth-child(even){
+  background: var(--neutral-2); /* Use neutral for even rows */
 }
 
-.KBHelptable tr:nth-child(odd){ 
-		background: rgba(0,0,0,0.1);
-	}
-	/*  Define the background color for all the EVEN background rows  */
-	.KBHelptable tr:nth-child(even){
-		background: rgba(255,255,255,0.1);
-	}
-
-  .storeIcon {
-    height: 100%;
-    opacity: 0.6;
-    min-width: 8%;
-    background-size: contain;
-    border: 0px solid white;
-    background-position: 5% 50%;
-    background-repeat: no-repeat;
-    transition: opacity 0.3s ease-in-out;
-    background-image: url('/img/storeicon.png');
-  }
-
-  .storeIcon:hover {
-    opacity: 1;
-    cursor: pointer;
-    transition: opacity 0.3s ease-in-out;
-  }
+/* Store Icon */
+.storeIcon {
+  height: 24px; /* Fixed height */
+  width: 24px; /* Fixed width */
+  opacity: 0.7; /* Default opacity */
+  background-size: contain;
+  /* border: 0px solid white; */
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 0.2s ease-in-out;
+  background-image: url('/img/storeicon.png'); /* Ensure path is correct */
+  display: inline-block; /* For alignment */
+  vertical-align: middle; /* Align with text/buttons */
+}
+.storeIcon:hover {
+  opacity: 1;
+  cursor: pointer;
+}

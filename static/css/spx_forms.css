@@ -1,461 +1,444 @@
 /*
   Copyright 2020 Softpix
   CSS file for form items. Loaded after spx_layout.css
+  Updated for modern look with CSS variables.
 */
 
+/* Using CSS variables defined in spx_colors.css */
+
 ::placeholder {
-    color: #555;
-    opacity: 1;
+    color: var(--text-secondary); /* Use secondary text for placeholders */
+    opacity: 0.7; /* Slightly more subtle */
 }
 
-.cfg::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-    /* font-family: Arial, Helvetica, sans-serif; */
-    opacity: 0.4;
+.cfg::placeholder { /* Config specific placeholders */
+    color: var(--text-secondary);
+    opacity: 0.6;
 }
 
-.spxformtext {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1em;
+.spxformtext { /* General form text, ensure consistency */
+    font-family: "UI-Regular", Arial, Helvetica, sans-serif; /* Consistent font */
+    font-size: 0.9em; /* Adjusted size */
+    color: var(--text-primary);
 }
 
 .disabled_btn {
-    opacity: 0.2;
+    opacity: 0.4; /* Consistent disabled opacity */
+    cursor: not-allowed;
 }
 
-.cfg {
-    font-family: "UI-Light", Arial, Helvetica, sans-serif;
-    height: 2.4em;
-    font-size: 0.8em;
-    color: white;
-    border: 2px solid transparent;
-    margin-left: 0.1em;
-    margin-right: 0.1em;
-    text-shadow: rgb(0, 0, 0, 0.4) 0 0px 8px;
-    box-shadow: rgb(0, 0, 0, 0.4) 0 3px 8px;
-    padding-inline-start: 5px;
+/* General input field styling (.cfg is widely used) */
+.cfg, input[type="text"], input[type="password"], input[type="email"], input[type="number"], input[type="search"], textarea, select {
+    font-family: "UI-Regular", Arial, Helvetica, sans-serif; /* Consistent font */
+    min-height: 2.2em; /* Minimum height for better touch targets */
+    font-size: 0.9em; /* Adjusted size */
+    color: var(--text-primary);
+    background-color: var(--neutral-2); /* Use neutral background */
+    border: 1px solid var(--border-color); /* Standard border */
+    border-radius: 4px; /* Standard rounding */
+    margin: 0.2em 0.1em; /* Adjusted margin */
+    padding: 0.5em 0.6em; /* Consistent padding */
+    box-shadow: none; /* Remove old box shadow */
+    transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+.cfg:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="search"]:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--brand-primary); /* Brand color focus */
+    background-color: var(--neutral-1); /* Slightly darker on focus */
 }
 
 
-.addbtn {
-    font-size: 1.2em;
-    color: white;
-    border: 2px solid transparent;
+.addbtn { /* Add button style */
+    font-size: 1em; /* Adjusted size */
+    color: var(--text-primary);
+    background-color: var(--brand-primary); /* Use brand color */
+    border: none; /* Remove border, rely on background */
     text-transform: uppercase;
     font-family: "UI-Bold", Arial, Helvetica, sans-serif;
-    text-shadow: rgb(0, 0, 0, 0.4) 0 0px 8px;
-    box-shadow: rgb(0, 0, 0, 0.4) 0 3px 8px;
-    padding-inline-start: 0.4em;
-    padding-inline-end: 0.4em;
-    margin-left: auto;
-    margin-right: auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Subtle shadow */
+    padding: 0.6em 1em; /* Adjusted padding */
+    margin: 0.5em auto; /* Center if needed */
     cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+}
+.addbtn:hover {
+    background-color: var(--brand-primary-darker); /* Darker brand on hover */
 }
 
-.addbtn:hover {
-    border: 2px solid rgba(255, 255, 255, 0.4);
-}
+/* General button styling */
 .btn {
-    height: 2.4em;
-    font-size: 0.8em;
-    color: white;
-    border: 2px solid transparent;
+    min-height: 2.2em;
+    font-size: 0.9em;
+    color: var(--text-primary);
+    background-color: var(--neutral-3); /* Neutral background for general buttons */
+    border: 1px solid var(--border-color);
     text-transform: uppercase;
     font-family: "UI-Bold", Arial, Helvetica, sans-serif;
-    text-shadow: rgb(0, 0, 0, 0.4) 0 0px 8px;
-    box-shadow: rgb(0, 0, 0, 0.4) 0 3px 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
     user-select: none;
     cursor: pointer;
-    padding: 0.4em 0; 
+    padding: 0.5em 1em;
     margin-bottom: 0.1em;
     white-space: nowrap;
     overflow: hidden;
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
-
 .btn:hover {
-    border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+    background-color: var(--neutral-2); /* Slightly darker on hover */
+    border-color: var(--text-secondary);
 }
-
 .btn:focus{
     outline: none;
+    border-color: var(--brand-primary); /* Brand focus outline */
 }
 
-
+/* Small button styling */
 .btnsmall {
-    font-size: 0.7em;
-    color: white;
-    border: 2px solid transparent;
-    margin-left: 1px;
-    margin-right: 1px;
+    font-size: 0.8em; /* Adjusted size */
+    color: var(--text-primary);
+    background-color: var(--neutral-2);
+    border: 1px solid var(--border-color);
     font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    box-shadow: rgb(0, 0, 0, 0.4) 0 3px 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
     text-transform: uppercase;
-    height: 150%;
-    padding: 0.3em 1em;
+    padding: 0.4em 0.8em; /* Adjusted padding */
     cursor: pointer;
+    border-radius: 3px; /* Slightly less rounding for small buttons */
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
-
 .btnsmall:hover {
-    border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+    background-color: var(--neutral-1);
+    border-color: var(--text-secondary);
 }
-
 .btnsmall:focus{
     outline: none;
+    border-color: var(--brand-primary);
 }
 
+/* Color picker button - needs specific styling if it's a visual element */
 .colorbtnsmall {
-    position: absolute;
-    border: 1px solid rgba(0, 0, 0, 1);
+    position: relative; /* Changed from absolute for better flow */
+    display: inline-block; /* Allow it to sit with other elements */
+    border: 1px solid var(--border-color);
     margin: 4px;
-    height: 80%;
-    width: 50%;
+    height: 2em; /* Standard height */
+    width: 3em; /* Adjust width as needed */
     cursor: pointer;
-    border-radius: 0.5em;
-    font-size: 1.0em;
-    color: rgba(200,200,200,0.8);
-    text-shadow: 1px 1px 1px black;
-
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    background-color: var(--neutral-2); /* Default background */
+    /* text-shadow: none; */ /* Remove text shadow */
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
-
 .colorbtnsmall:hover {
-    /* border: 2px solid rgba(255, 255, 255, 0.1); */
-
+    border-color: var(--brand-primary);
 }
-
 .colorbtnsmall:focus{
     outline: none;
+    border-color: var(--brand-primary);
 }
 
-.drop {
-    height: 2.4em;
-    font-size: 0.8em;
-    color: white;
-    border: 2px solid transparent;
-    margin-left: 0.1em;
-    margin-right: 0.1em;
+/* Dropdown / Select styling */
+.drop, select { /* Apply to standard select too */
+    min-height: 2.2em;
+    font-size: 0.9em;
+    color: var(--text-primary);
+    background-color: var(--neutral-2);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0.5em 0.6em;
     font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    text-shadow: rgb(0, 0, 0, 0.4) 0 0px 8px;
-    box-shadow: rgb(0, 0, 0, 0.4) 0 3px 8px;
+    box-shadow: none;
+    -webkit-appearance: none; /* Remove default system appearance */
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23a0a0a0' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E"); /* Custom arrow */
+    background-repeat: no-repeat;
+    background-position: right 0.7em top 50%;
+    background-size: 0.9em auto;
+    padding-right: 2.5em; /* Make space for arrow */
+}
+.drop:hover, select:hover {
+    border-color: var(--text-secondary);
 }
 
-.drop:hover {
-    border-bottom: 2px solid rgba(255, 255, 255, 0.4);
-}
-
-
-
-
+/* Floating input - specific use case, ensure it fits the new theme */
 .floinput {
-    padding: 0.1em;
-    background-color: #706e83;
-    border: 0;
-    font-family: inherit;
-    font-size: 1em;
-    margin: 0px;
-    color: white;
+    padding: 0.4em 0.6em;
+    background-color: var(--neutral-1); /* Darker neutral for floating inputs */
+    border: 1px solid var(--border-color);
     font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    height: 100%;
+    font-size: 0.9em;
+    color: var(--text-primary);
+    border-radius: 4px;
     box-sizing: border-box;
 }
 
+/* Custom Checkbox (.gccheckcontainer) */
 .gccheckcontainer {
     display: block;
     position: relative;
-    padding-left: 35px;
+    padding-left: 30px; /* Space for custom checkbox */
     margin-top: 8px;
-    margin-bottom: 6px;
+    margin-bottom: 12px; /* Increased margin */
     cursor: pointer;
     user-select: none;
+    font-size: 0.9em; /* Consistent font size */
 }
-
-.gccheckboxdiv label{
-    font-size: 0.7em;
-    color: rgba(255, 255, 255, 0.7)
+.gccheckboxdiv label{ /* Label text next to checkbox */
+    font-size: 1em; /* Relative to container */
+    color: var(--text-secondary);
+    vertical-align: middle;
 }
-
-/* Hide the browser's default checkbox */
-.gccheckcontainer input {
+.gccheckcontainer input { /* Hide browser default */
     position: absolute;
     opacity: 0;
     cursor: pointer;
     height: 0;
     width: 0;
-  }
-
-/* Create a custom checkbox */
-.gccheckmark {
+}
+.gccheckmark { /* Custom checkbox appearance */
     position: absolute;
     top: 0;
     left: 0;
-    height: 23px;
-    width: 23px;
-    background-color: rgb(163, 163, 163);
+    height: 20px; /* Adjusted size */
+    width: 20px; /* Adjusted size */
+    background-color: var(--neutral-3); /* Neutral background */
+    border: 1px solid var(--border-color);
+    border-radius: 3px; /* Slightly rounded */
     transform: none !important;
-  }
-
-/* On mouse-over, add a grey background color */
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
 .gccheckcontainer:hover input ~ .gccheckmark {
-    background-color: rgb(241, 236, 236);
-  }
-
-/* When the checkbox is checked, add a blue background */
+    background-color: var(--neutral-2); /* Lighter on hover */
+}
 .gccheckcontainer input:checked ~ .gccheckmark {
-    background-color: #008000;
-  }
-  
-/* Create the checkmark/indicator (hidden when not checked) */
-.gccheckmark:after {
+    background-color: var(--brand-primary); /* Brand color when checked */
+    border-color: var(--brand-primary);
+}
+.gccheckmark:after { /* Checkmark symbol */
     content: "";
     position: absolute;
     display: none;
-  }
-
-/* Show the checkmark when checked */
+}
 .gccheckcontainer input:checked ~ .gccheckmark:after {
     display: block;
-  }
-
-/* Style the checkmark/indicator */
-.gccheckcontainer .gccheckmark:after {
-    left: 9px;
-    top: 5px;
+}
+.gccheckcontainer .gccheckmark:after { /* Style the checkmark */
+    left: 6px; /* Centered */
+    top: 2px;  /* Centered */
     width: 5px;
     height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
+    border: solid var(--text-primary); /* White checkmark */
+    border-width: 0 2px 2px 0; /* Thinner checkmark */
     transform: rotate(45deg);
-  }
+}
 
-.gcinput{
+/* General Input (.gcinput) and Filter Input (.gcinputFilter) */
+.gcinput, .gcinputFilter {
     width: 100%;
     font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    font-size:1em;
-    margin: 1px;
-    margin-top: 5px; /*5px  */
-    line-height: 132%;
-    padding-left: 0.2em;
-    user-select: auto;
-}
-.gcinput::placeholder {
-    color: rgb(156, 156, 156);
-    font-family: Arial, Helvetica, sans-serif;
-    font-style: italic;
     font-size: 0.9em;
-    letter-spacing: 1px;
+    margin: 0.2em 0; /* Adjusted margin */
+    line-height: 1.5; /* Improved line height */
+    padding: 0.5em 0.6em;
+    user-select: auto; /* Allow text selection */
+    background-color: var(--neutral-2);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-primary);
 }
-
-.gcinputFilter{
-    width: 100%;
-    font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    font-size:1em;
-    margin: 1px;
-    margin-top: 5px;
-    line-height: 132%;
-    padding-left: 0.2em;
-    user-select: auto;
+.gcinput::placeholder, .gcinputFilter::placeholder {
+    color: var(--text-secondary);
+    font-style: italic;
+    opacity: 0.7;
 }
-.gcinputFilter:focus {
+.gcinput:focus, .gcinputFilter:focus {
     outline: none;
+    border-color: var(--brand-primary);
+    background-color: var(--neutral-1);
 }
-.gcinputFilter::placeholder {
-    color: rgba(255, 255, 255, 0.13);
-    font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    font-size: 0.8em;
-    letter-spacing: 0px;
-    transform: translateY(-10%);
-    }
+.gcinputFilter::placeholder { /* Specific placeholder styling for filter */
+    font-size: 0.9em; /* Consistent size */
+    letter-spacing: normal; /* Reset letter spacing */
+    transform: none; /* Reset transform */
+}
 
-/* .select {
-    border-radius: 0.10em;
-    padding: 0.1em 0.2em;
-    font-size: 1.0rem;
-    line-height: 1.1;
-    background-color: rgb(230, 230, 230);
-} */
-
+/* Select element - already covered by general input styling, but ensure consistency */
 .select {
-    /* -webkit-appearance: none;
-    -moz-appearance: none; */
-    /* background: transparent; */
-    /* background-image: url("data:image/svg+xml,<svg width='36' height='18' xmlns='http://www.w3.org/2000/svg'><path d='m0,6l12,12l12,-12l-24,0z'/><path fill='none' d='m0,0l24,0l0,24l-24,0l0,-24z'/></svg>");
-    background-repeat: no-repeat;
-    background-position-x: 98%;
-    background-position-y: 50%; */
-    /* border: 1px solid #cdf1ff; */
-    background-color: #ececec;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.7);
-    border-radius: 0.2rem;
-    margin-right: 2rem;
-    padding: 0.2rem;
-    padding-right: 2rem;
-    border-right: 10px solid #2768dab9;
-  }
+    /* Ensure it inherits from general input styles or redefine consistently */
+    min-height: 2.2em;
+    font-size: 0.9em;
+    /* ... other properties from .cfg ... */
+    /* Custom arrow already defined for select in general styles */
+}
 
-
+/* Specific input types like .tablineinput, .headlineinput, .tickerinput */
+/* These seem highly specialized. Review if they need to adhere to the global form style or maintain uniqueness. */
+/* For now, applying basic variable updates. */
 .tablineinput {
     font-family: "UI-Black", Arial, Helvetica, sans-serif;
     margin: 0px;
     border: 0;
-    font-size: 1.2em; /* <-------------------------- HEADLINE SIZE IN UI*/
-    background-color: brown;
-    color: white;
+    font-size: 1.2em;
+    background-color: var(--brand-primary-darker); /* Use brand color */
+    color: var(--text-primary);
     display: inline-block;
-    padding: 0.1em;
-    padding-left: 0.4em;
-    padding-right: 0.2em;
+    padding: 0.2em 0.5em; /* Adjusted padding */
+    border-radius: 3px;
 }
-
 .headlineinput {
     font-family: "UI-Black", Arial, Helvetica, sans-serif;
     margin: 0px;
-    background-color: white;
-    color: black;
-    padding-left: 0.2em;
-    border: 0;
-    font-size: 2.4em; /* <-------------------------- HEADLINE SIZE IN UI*/
+    background-color: var(--neutral-1); /* Use neutral for less stark contrast */
+    color: var(--text-primary);
+    padding: 0.2em 0.4em;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 2em; /* Slightly reduced for modern feel */
 }
-
 .tickerinput {
     font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    padding-left: 0.2em;
-    background-color: #222;
+    padding: 0.2em 0.4em;
+    background-color: var(--neutral-1); /* Darker neutral */
     margin: 0px;
-    border: 0;
-    color: white;
-    font-size: 1.35em; /* <-------------------------- HEADLINE SIZE IN UI*/
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-primary);
+    font-size: 1.2em; /* Adjusted size */
 }
  
+/* IMS Input - specific styling */
 .imsinput {
     flex: auto;
     flex-basis: 290px;
-    padding: 0.1em;
-    background-color: #706e83;
-    border: 0;
-    font-family: inherit;
-    font-size: 0.9em; /* Changed 15.04.2020 - was 1.em */
-    margin: 0px;
-    color: white;
+    padding: 0.5em 0.6em; /* Consistent padding */
+    background-color: var(--neutral-2);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
     font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    height: 100%;
+    font-size: 0.9em;
+    color: var(--text-primary);
+    min-height: 2.2em; /* Consistent height */
     box-sizing: border-box;
-    height: 1.83em; /* Added 15.04.2020 */
 }
 
-.inlineInput {
-    padding: 0.1em;
-    background-color: inherit;
-    border: 0;
-    font-family: inherit;
+.inlineInput { /* For inputs meant to be inline with text */
+    padding: 0.1em 0.3em; /* Minimal padding */
+    background-color: transparent; /* Transparent background */
+    border: none; /* No border */
+    border-bottom: 1px solid var(--border-color); /* Subtle underline */
+    font-family: inherit; /* Inherit font */
     font-size: 1em;
-    margin: 0px;
-    color: white;
-    font-family: "UI-Regular", Arial, Helvetica, sans-serif;
-    height: 100%;
-    /* width: 100%; */
-    box-sizing: border-box;
+    color: var(--text-primary);
+    border-radius: 0; /* No rounding for underline style */
+}
+.inlineInput:focus {
+    border-bottom-color: var(--brand-primary);
 }
 
-.spxRoundedButton {
+.spxRoundedButton { /* Rounded button style */
     margin: 10px;
-    font-size: 60%;
-    padding: 0 2em;
-    border-radius: 1em;
+    font-size: 0.8em; /* Adjusted size */
+    padding: 0.6em 1.5em; /* Adjusted padding */
+    border-radius: 2em; /* Fully rounded ends */
+    background-color: var(--brand-primary);
+    color: var(--text-primary);
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+.spxRoundedButton:hover {
+    background-color: var(--brand-primary-darker);
 }
 
-/* Ripple effect */
+/* Ripple effect - keep if it's a desired modern interaction */
 .ripple {
     background-position: center;
-    transition: background 0.2s;
+    transition: background 0.3s ease-out; /* Slightly slower for smoother ripple */
 }
 .ripple:hover {
-    /* background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%; */
+    /* Consider a subtle background change or rely on other hover effects */
 }
-.ripple:active {
-    background-color: #ffffff;
-    background-size: 100%;
+.ripple:active { /* Ripple effect color */
+    background-color: var(--brand-primary); /* Use brand color for ripple */
+    opacity: 0.3; /* Make ripple semi-transparent */
+    background-size: 15000%; /* Keep large size for effect */
     transition: background 0s;
 }
 
-
 .generalSettingDropdown:disabled {
-    color: rgba(255,255,255,0.6);
-  }
+    color: var(--text-secondary); /* Use secondary text for disabled */
+    opacity: 0.5; /* Consistent opacity */
+    background-color: var(--neutral-3); /* Darker background for disabled */
+}
 
-/* The radiocontainer */
+/* Custom Radio Button (.radiocontainer) */
 .radiocontainer {
     display: block;
     position: relative;
-    padding-left: 1.8em;
-    margin-bottom: 0.5em;
+    padding-left: 28px; /* Space for custom radio */
+    margin-bottom: 0.8em; /* Adjusted margin */
     cursor: pointer;
-    font-size: 1.2em;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+    font-size: 0.9em; /* Consistent font size */
     user-select: none;
-  }
-  
-  /* Hide the browser's default radio button */
-  .radiocontainer input {
+    color: var(--text-secondary); /* Label color */
+}
+.radiocontainer input { /* Hide browser default */
     position: absolute;
     opacity: 0;
     cursor: pointer;
-  }
-  
-  /* Create a custom radio button */
-  .checkmark {
+}
+.checkmark { /* Custom radio button appearance */
     position: absolute;
-    top: -0.2em;
+    top: 0.1em; /* Align with text */
     left: 0;
-    height: 1.3em;
-    width: 1.3em;
-    background-color: #eee;
-    border-radius: 50%;
-  }
-  
-  /* On mouse-over, add a grey background color */
-  .radiocontainer:hover input ~ .checkmark {
-    background-color: rgb(146, 179, 155);
-  }
-  
-  /* When the radio button is checked, add a blue background */
-  .radiocontainer input:checked ~ .checkmark {
-    background-color: #54af3c;
-  }
-  
-  /* Create the indicator (the dot/circle - hidden when not checked) */
-  .checkmark:after {
+    height: 18px; /* Adjusted size */
+    width: 18px; /* Adjusted size */
+    background-color: var(--neutral-3); /* Neutral background */
+    border: 1px solid var(--border-color);
+    border-radius: 50%; /* Circular radio button */
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+.radiocontainer:hover input ~ .checkmark {
+    background-color: var(--neutral-2);
+}
+.radiocontainer input:checked ~ .checkmark {
+    background-color: var(--brand-primary); /* Brand color when checked */
+    border-color: var(--brand-primary);
+}
+.checkmark:after { /* Dot inside radio button */
     content: "";
     position: absolute;
     display: none;
-  }
-  
-  /* Show the indicator (dot/circle) when checked */
-  .radiocontainer input:checked ~ .checkmark:after {
+}
+.radiocontainer input:checked ~ .checkmark:after {
     display: block;
-  }
-  
-  /* Style the indicator (dot/circle) */
-  .radiocontainer .checkmark:after {
-       top: 0.4em;
-      left: 0.4em;
-      width: 0.5em;
-      height: 0.5em;
-      border-radius: 50%;
-      background: rgb(255, 255, 255);
-  }
+}
+.radiocontainer .checkmark:after { /* Style the dot */
+    top: 5px; /* Centered */
+    left: 5px; /* Centered */
+    width: 8px; /* Adjusted size */
+    height: 8px; /* Adjusted size */
+    border-radius: 50%;
+    background: var(--text-primary); /* White dot */
+}
 
-  .toggleON {
-      /* used for buttons to mimic toggle functionality */
-      transform: translateY(1px);
-      text-shadow:0px 0px 10px rgba(128, 255, 0, 0.8);
-      box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.5),
-                  inset 0 -4px 10px rgba(0, 0, 0, 0.3);
-      
-  }
+/* Toggle ON state for buttons */
+.toggleON {
+    transform: translateY(1px); /* Keep subtle press effect */
+    background-color: var(--brand-primary-darker) !important; /* Use darker brand for ON state */
+    color: var(--text-primary) !important;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); /* Inner shadow for pressed look */
+    border-color: var(--brand-primary-darker) !important;
+    /* text-shadow: none; */ /* Remove text shadow for cleaner look */
+}
 
-  .selectAll {
-    font-size: 2em;
-  }
+.selectAll { /* "Select All" checkbox or similar */
+    font-size: 1.1em; /* Adjusted size for better prominence */
+    /* Ensure it uses .gccheckcontainer styles if it's a checkbox */
+}

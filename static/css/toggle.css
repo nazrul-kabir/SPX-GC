@@ -5,45 +5,47 @@
 /*
   Rec toggle switch and
   volume sliders
-
+  Updated for modern look with CSS variables.
 */
 
+/* Using CSS variables defined in spx_colors.css and spx_layout.css */
 :root {
-  --vc-off-color:             #2A3641; /* linear-gradient(190deg, rgba(0, 0, 0, 0.39) 5%, rgba(0, 0, 0, 0.157) 50%); */
-  --vc-on-color:              #2A3641;
+  --vc-off-color:             var(--neutral-2); /* Darker neutral for off state */
+  --vc-on-color:              var(--brand-primary); /* Brand color for on state */
   --vc-animation-speed:       0.2s ease-out;
-  --vc-font-family:           "UI-Regular";
-  --vc-font-size:             1.2em;
-  --vc-font-weight:           unset;
-  --vc-on-font-color:         rgba(255, 255, 255, 1.0);
-  --vc-off-font-color:        rgb(255, 255, 255);
-  --vc-label-position-off:    14px;
-  --vc-label-position-on:     14px;
-  --vc-height:                1.3em; /* 2.0em*/
+  --vc-font-family:           "UI-Regular", Arial, Helvetica, sans-serif; /* Consistent font */
+  --vc-font-size:             0.9em; /* Adjusted base font size */
+  --vc-font-weight:           normal; /* Regular font weight */
+  --vc-on-font-color:         var(--text-primary); /* White text on brand color */
+  --vc-off-font-color:        var(--text-secondary); /* Secondary text for off state */
+  --vc-label-position-off:    10px; /* Adjusted label positioning */
+  --vc-label-position-on:     10px; /* Adjusted label positioning */
+  --vc-height:                2em; /* Slightly taller for better touch */
   --vc-width:                 100%;
-  --vc-handle-width:          60%;
-  --vc-handle-height:         90%;
-  --vc-box-border-radius:     0px;
-  --vc-handle-border-radius:  0px;
-  --vc-handle-shadow:         0px 0px 5px rgba(0, 0, 0, 0.5);
-  --vc-handle-color:          #485a6b; /* rgb(61, 61, 61); */
-  --vc-onclick-width:         80%;
-  --vc-handle-top:            0.1em;  /* 0.2 */
-  --vc-handle-fontsize:       0.7em; /* 0.8 */
-  --vc-handle-lineHeight:     1.7em; /* 2.2 */
+  --vc-handle-width:          55%; /* Adjusted handle width */
+  --vc-handle-height:         calc(100% - 4px); /* Handle height relative to container */
+  --vc-box-border-radius:     4px; /* Standard rounding */
+  --vc-handle-border-radius:  3px; /* Slightly less rounding for handle */
+  --vc-handle-shadow:         0 1px 3px rgba(0, 0, 0, 0.2); /* Softer shadow */
+  --vc-handle-color:          var(--neutral-1); /* Darker handle color */
+  --vc-onclick-width:         60%; /* Adjusted width on click */
+  --vc-handle-top:            2px;  /* Position handle from top */
+  --vc-handle-fontsize:       0.8em; /* Adjusted handle font size */
+  --vc-handle-lineHeight:     1.8em; /* Adjusted handle line height */
 }
 
 .toggle-container * {
   font-family:                var(--vc-font-family);
   transition:                 var(--vc-animation-speed);
   cursor:                     pointer;
-  /* background:                 darkgreen; */
 }
 
 .vc-switch {
   width:                      var(--vc-width);
   height:                     var(--vc-height);
   margin-top:                 5px;
+  border: 1px solid var(--border-color); /* Add border to switch container */
+  border-radius:              var(--vc-box-border-radius); /* Apply rounding to container */
 }
 
 .toggle-container label {
@@ -51,68 +53,62 @@
   display:                    inline-block;
   vertical-align:             top;
   border-radius:              var(--vc-box-border-radius);
-  /* cursor:                     pointer; */
 }
 
-.vc-switch-input {
+.vc-switch-input { /* Hidden checkbox */
   position:                   absolute;
-  transform:                  translate3d(5px, 5px, 0);
   opacity:                    0;
+  width: 0; height: 0; /* Ensure it takes no space */
 }
 
-.vc-switch-label {
+.vc-switch-label { /* Visual part of the switch */
   position:                   relative;
   display:                    block;
   height:                     inherit;
   font-size:                  var(--vc-font-size);
   font-weight:                var(--vc-font-weight);
   background:                 var(--vc-off-color);
-  border-radius:              inherit;
+  border-radius:              inherit; /* Inherit rounding from parent label/vc-switch */
+  overflow: hidden; /* Hide overflowing text */
 }
 
 .vc-switch-label:before,
-.vc-switch-label:after {
+.vc-switch-label:after { /* Text labels for ON/OFF */
   position:                   absolute;
   top:                        50%;
-  margin-top:                 -0.5em;
-  line-height:                1.1;
+  transform:                  translateY(-50%); /* Vertical centering */
+  line-height:                var(--vc-height); /* Ensure text fits */
+  padding:                    0 0.5em; /* Add some padding to text */
 }
 
-.vc-switch-label:before {
+.vc-switch-label:before { /* OFF text */
   content:                    attr(data-off);
-  color:                      var(--vc-on-font-color);
-}
-
-.vc-switch-label:after {
-  content:                    attr(data-on);
   color:                      var(--vc-off-font-color);
-  opacity:                    0;
-}
-
-.vc-switch-label:before {
   right:                      var(--vc-label-position-off);
-  top:                        16px;
 }
 
-.vc-switch-label:after {
-  left:                       var(--vc-label-position-on);;
+.vc-switch-label:after { /* ON text */
+  content:                    attr(data-on);
+  color:                      var(--vc-on-font-color);
+  opacity:                    0; /* Hidden by default */
+  left:                       var(--vc-label-position-on);
 }
 
-.vc-switch-input:checked ~ .vc-switch-label {
+.vc-switch-input:checked ~ .vc-switch-label { /* Styles when checked */
   background:                 var(--vc-on-color);
-  text-shadow:                0px 0px 6px rgba(255, 255, 255, 0.6);
+  /* text-shadow: none; */ /* Remove text shadow for modern look */
 }
 
-.vc-switch-input:checked ~ .vc-switch-label:before {
+.vc-switch-input:checked ~ .vc-switch-label:before { /* Hide OFF text when checked */
   opacity:                    0;
 }
 
-.vc-switch-input:checked ~ .vc-switch-label:after {
+.vc-switch-input:checked ~ .vc-switch-label:after { /* Show ON text when checked */
   opacity:                    1;
 }
 
-.vc-handle {
-  left:                       2px;
+.vc-handle { /* The sliding handle */
+  left:                       2px; /* Initial position */
   font-size:                  var(--vc-handle-fontsize);
   position:                   absolute !important;
   top:                        var(--vc-handle-top);
@@ -122,31 +118,29 @@
   width:                      var(--vc-handle-width);
   height:                     var(--vc-handle-height);
   line-height:                var(--vc-handle-lineHeight);
+  display: flex; /* For centering content inside handle if any */
+  align-items: center;
+  justify-content: center;
 }
 
-
-.vc-handle:before {
+.vc-handle:before { /* Optional inner circle/element in handle */
   content:                    "";
-  top:                        50%;
-  left:                       50%;
-  position:                   absolute !important;
-  margin:                     -6px 0 0 -6px;
-  width:                      12px;
-  height:                     12px;
-  border-radius:              6px;
+  /* Removed by default for cleaner look, can be re-added if design requires */
+  /* top: 50%; left: 50%; position: absolute !important;
+  margin: -4px 0 0 -4px; width: 8px; height: 8px; border-radius: 4px;
+  background-color: rgba(255,255,255,0.3); */
 }
 
-.vc-switch-label:active ~ .vc-handle, .vc-handle:active {
+.vc-switch-label:active ~ .vc-handle, .vc-handle:active { /* Handle style on click */
   width:                    var(--vc-onclick-width);
 }
 
-.vc-switch-input:checked ~ .vc-handle {
-  left:                     unset;
-  right:                    2px;
+.vc-switch-input:checked ~ .vc-handle { /* Handle position when checked */
+  left:                     calc(100% - var(--vc-handle-width) - 2px); /* Move to the right */
+  right:                    auto; /* Reset right if previously set */
+  background-color:         var(--brand-primary-darker); /* Slightly darker brand for handle when ON */
   color:                    var(--vc-on-font-color);
-  text-shadow:              0 0 6px var(--vc-on-font-color),
-                            0 4px 8px green,
-                            0 0px 12px rgb(20, 209, 20);
+  /* text-shadow: none; */ /* Remove text shadow */
 }
 
 
