@@ -63,12 +63,6 @@
             </div>
 
           </div>
-          <div style="display: flex; align-items: center;">
-            <label class="switch" for="darkModeToggle" style="margin-left: 10px;">
-              <input type="checkbox" id="darkModeToggle">
-              <span class="slider round"></span>
-            </label>
-          </div>
           <div id="breadCrumsZone">
             {{#ifValue page "appconfig"}}
               <span class="caret-icon">&#9654;</span>
@@ -150,6 +144,12 @@
 
             -->
 
+          </div>
+          <div style="display: flex; align-items: center; margin-left: auto;">
+            <label class="switch" for="darkModeToggle" style="margin-left: 10px;">
+              <input type="checkbox" id="darkModeToggle">
+              <span class="slider round"></span>
+            </label>
           </div>
           <div id="CasparZone" class="serverButtons">
             {{#ifValue page "controller"}}

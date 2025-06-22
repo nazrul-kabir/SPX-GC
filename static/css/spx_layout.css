@@ -387,7 +387,7 @@ div.curfolder{
 .header {
     padding: 0.5em 0.7em 0.0em 0.7em;
     border: 0px solid pink; /* For debugging, consider removing or making it conditional */
-    background-color: var(--header-background-light);
+    /* background-color for light mode will be inherited or transparent, effectively using body background */
 }
 
 body.dark-mode .header {
@@ -534,7 +534,7 @@ body.dark-mode .header {
 
 
 .itemlist {
-    background-color: var(--background-color-light);
+    background-color: #2A3641; /* Restored original light mode background */
     /* background-image: url('/media/images/rundown_graphic.png');
     background-size: 100%;
     background-repeat: no-repeat;

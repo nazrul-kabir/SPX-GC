@@ -97,7 +97,7 @@ body.dark-mode .bg_red {
 }
 
 body.dark-mode .bg_black {
-    background-color: var(--background-color-dark); /* Use dark mode background */
+    background-color: var(--card-background-dark); /* Use card background for a slightly lighter black */
 }
 
 .bg_white {
