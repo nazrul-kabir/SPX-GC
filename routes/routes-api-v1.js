@@ -27,8 +27,21 @@ const spxAuth = require('../utils/spx_auth.js');
 let apiCache = [] // used to cache [undocumented] API calls
 let ack = 'Sent request to SPX server. Acknowledgement is not to be expected.'
 let ack2 = 'Sent request to SPX Controller. Acknowledgement is not to be expected.'
-const apiHandler = require('../utils/api-handlers.js');
 
+function panic() {
+    try {
+        io.emit('SPXMessage2Client', {spxcmd: 'clearAllLayers'}); // clear webrenderers
+        io.emit('SPXMessage2Controller', {APIcmd:'RundownAllStatesToStopped'}); // stop UI and save stopped values to rundown
+        if (spx.CCGServersConfigured){
+            PlayoutCCG.clearChannelsFromGCServer() // server is optional, so doing ALL!!!!!
+        }
+        console.log('PANIC HANDLER');
+        return true
+    } catch (error) {
+        console.log('Panic error' + error);
+        return false
+    }
+  }
 
   // ROUTES -------------------------------------------------------------------------------------------
   router.get('/', function (req, res) {
