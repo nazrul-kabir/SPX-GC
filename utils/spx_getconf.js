@@ -83,6 +83,9 @@ module.exports = {
                     cfg.osc.enable                              = false
                     cfg.osc.port                                = 57121
 
+                    cfg.mos                                     = {}
+                    cfg.mos.odb                                 = "http://localhost:3002"
+
                     cfg.globalExtras                            = {}
                     cfg.globalExtras.customscript               = "/ExtraFunctions/demoFunctions.js"
                     cfg.globalExtras.CustomControls             = []

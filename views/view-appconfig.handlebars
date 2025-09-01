@@ -253,6 +253,25 @@
           <BR><BR>
           <table class="wide" border=0>
             <TR>
+              <td class="vmid tableheaderText">MOS Settings</td>
+              <td class="vmid tableheaderHelp aright" title="MOS Settings Help" onClick="help('mos');" onmouseover="tip('MOS Settings Help');"><i class="far fa-question-circle"></i>&nbsp;</td>
+            </TR>
+          </table>
+          <hr class="h2hr"><!-- =========================================== -->
+          <table style="width: 100%;" cellspacing="5" border="0">
+            <tr onmouseover="tip('URL to the MOS ODB (Open Database)');">
+              <td width="40%">
+                <span class="spxConfigHead">ODB URL</span>
+              </td>
+              <td>
+                <input type="text" class="wide bg_grey15 cfg" placeholder="http://localhost:3002" name="mos[odb]" value="{{config.mos.odb}}">
+              </td>
+            </tr>
+          </table>
+
+          <BR><BR>
+          <table class="wide" border=0>
+            <TR>
               <td class="vmid tableheaderText">{{lang 'config.webplayout'}}</td>
               <td class="vmid tableheaderHelp aright" title="{{lang 'general.help'}}" onClick="help('webplayout');" onmouseover="tip('{{lang 'hover.help'}}');"><i class="far fa-question-circle"></i>&nbsp;</td>
             </TR>

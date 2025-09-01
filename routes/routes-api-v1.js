@@ -1148,5 +1148,55 @@ const apiHandler = require('../utils/api-handlers.js');
 
     }); // end feedproxy POST
 
+    router.post('/rundown/updatefromexternal/:id', spxAuth.CheckAPIKey, async (req, res) => {
+      const id = req.params.id;
+      const rundownFile = 'MOS_RUNDOWN';
+
+      try {
+        // 1. Fetch data from external API
+        const externalApiUrl = `${config.mos.odb}/${id}`;
+        const response = await axios.get(externalApiUrl);
+        const externalData = response.data;
+
+        const project = externalData.project;
+        const newTemplate = externalData.object;
+
+        const rundownFilePath = path.join(spx.getDatarootFolder(), project, 'data', `${rundownFile}.json`);
+        let rundownData;
+
+        if (fs.existsSync(rundownFilePath)) {
+          const fileContent = fs.readFileSync(rundownFilePath, 'utf-8');
+          rundownData = JSON.parse(fileContent);
+        } else {
+          rundownData = {
+            warning: "Modifications done in the SPX will overwrite this file.",
+            copyright: "(c) 2020- SPX Graphics (https://spx.graphics)",
+            templates: [],
+            project: project,
+            rundown: rundownFile
+          };
+        }
+
+        rundownData.templates.push(newTemplate);
+        rundownData.updated = new Date().toISOString();
+
+        await spx.writeFile(rundownFilePath, rundownData);
+
+        res.status(200).json({
+          status: 200,
+          message: `Rundown '${rundownFile}.json' in project '${project}' updated successfully.`
+        });
+
+      } catch (error) {
+        logger.error(`Error in /rundown/updatefromexternal/${id}:`, error);
+        res.status(500).json({
+          status: 500,
+          message: 'Failed to update rundown from external data.',
+          error: error.message,
+          stack: error.stack
+        });
+      }
+    });
+
 
 module.exports = router;
