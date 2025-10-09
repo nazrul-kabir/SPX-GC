@@ -885,8 +885,10 @@ const ROUTEapp = require('./routes/routes-application.js');
 app.use('/', ROUTEapp);
 
 const ROUTEccg = require('./routes/routes-casparcg.js');
+const ROUTEthumbnail = require('./routes/routes-thumbnail.js');
 //const e = require('express')
 app.use('/CCG', ROUTEccg);
+app.use('/thumbnail', ROUTEthumbnail);
 
 process.on('uncaughtException', function(err) {
   logger.error('Uncaught Exception: ' + err);

@@ -13,6 +13,7 @@
   <script src="/js/socket.io.js"></script>
   <script src="/js/spx_gc.js"></script>
   <script src="/js/spx_showConfig.js"></script>
+  <script src="/js/spx_thumbnail.js"></script>
   <title>SPX | {{lang 'pagetitle.configshow'}}</title>
   <link rel="icon" type="image/png" href="/img/spx-gc.ico">
   <link rel="stylesheet" type="text/css" href="/css/spx_fonts.css">
@@ -94,6 +95,13 @@
                 <tr>
                   <td><span class="spxConfigHead">{{lang 'config.description'}}</span></td>
                   <td><input type="text" class="wide bg_grey15 cfg" placeholder="Description" name="templateData[description]" value="{{description}}" onmouseover="tip('{{lang 'hover.templatedescr'}}');"></td>
+                </tr>
+                <tr>
+                  <td><span class="spxConfigHead">Thumbnail</span></td>
+                  <td>
+                    <img id="thumbnail_{{@index}}" src="/templates/{{relpath}}/../thumbnails/thumbnail.png" onerror="this.onerror=null;this.src='/img/spx_online.png';" style="max-width: 200px; max-height: 113px; border: 1px solid #ccc; vertical-align: middle; margin-right: 10px;">
+                    <button type="button" class="btnsmall bg_blue" onclick="generateThumbnail('{{relpath}}', {{@index}})">Generate Thumbnail</button>
+                  </td>
                 </tr>
                 <tr>
                   <td><span class="spxConfigHead">{{lang 'config.inputfields'}}</span></td>

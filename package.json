@@ -14,7 +14,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "devORG": "nodemon server.js -i config.json -i DATAROOT/",
-    "dev": "nodemon server.js -i DATAROOT/* -i ASSETS/* -i config.json -i DATAROOT_VIDEO/*",
+    "dev": "nodemon server.js -i DATAROOT/ -i ASSETS/ -i config.json",
     "devdemo": "nodemon server.js config_demodataroot.json -i DATAROOT_DEMO/* -i config_demodataroot.json",
     "dev2": "nodemon server.js config2.json -i DATAROOT/* -i config2.json",
     "start": "pm2 start server.js --name GC",
@@ -47,7 +47,8 @@
     "rotating-file-stream": "^3.2.5",
     "socket.io": "^4.8.0",
     "sox-play": "0.0.2",
-    "winston": "^3.17.0"
+    "winston": "^3.17.0",
+    "puppeteer": "^22.13.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.7"
