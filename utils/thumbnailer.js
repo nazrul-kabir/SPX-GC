@@ -13,13 +13,25 @@ async function generate(templatePath) {
   await page.setViewport({ width: 1920, height: 1080 });
   await page.goto(thumbnailUrl, { waitUntil: 'networkidle0' });
 
-  // Wait for the template to signal that it is ready for a screenshot
+  // Wait for a ready signal from the template.
+  // If the signal is not received within a short timeout, fall back to a fixed delay.
+  // This ensures backward compatibility with older templates.
   try {
-    await page.waitForSelector('body[data-spx-thumbnail-ready="true"]', { timeout: 10000 });
+    // Wait for the ready signal for a short period (e.g., 250ms).
+    await page.waitForSelector('body[data-spx-thumbnail-ready="true"]', { timeout: 250 });
+    // console.log(`Ready signal detected for ${templatePath}.`); // Optional: for debugging
   } catch (error) {
-    console.error(`Timeout waiting for template signal: ${templatePath}`);
-    await browser.close();
-    throw new Error(`Timeout waiting for template to be ready: ${templatePath}`);
+    // If it's a timeout error, it means the signal wasn't found.
+    if (error.name === 'TimeoutError') {
+      // console.log(`No ready signal for ${templatePath}, falling back to 1-second delay.`); // Optional: for debugging
+      // Fallback to a fixed delay (e.g., 1000ms).
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    } else {
+      // For any other errors, re-throw them.
+      console.error(`An unexpected error occurred while generating thumbnail for ${templatePath}:`, error);
+      await browser.close();
+      throw error;
+    }
   }
 
   const templateDir = path.dirname(templateFullPath);

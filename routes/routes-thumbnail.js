@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const thumbnailer = require('../utils/thumbnailer');
+const spx = require('../utils/spx_server_functions.js');
+const path = require('path');
+const fs = require('fs');
 
 router.post('/thumbnail', async (req, res) => {
   const templatePath = req.body.templatePath;
