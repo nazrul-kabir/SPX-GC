@@ -13,8 +13,14 @@ async function generate(templatePath) {
   await page.setViewport({ width: 1920, height: 1080 });
   await page.goto(thumbnailUrl, { waitUntil: 'networkidle0' });
 
-  // Wait for a bit for animations to play
-  await new Promise(resolve => setTimeout(resolve, 1000));
+  // Wait for the template to signal that it is ready for a screenshot
+  try {
+    await page.waitForSelector('body[data-spx-thumbnail-ready="true"]', { timeout: 10000 });
+  } catch (error) {
+    console.error(`Timeout waiting for template signal: ${templatePath}`);
+    await browser.close();
+    throw new Error(`Timeout waiting for template to be ready: ${templatePath}`);
+  }
 
   const templateDir = path.dirname(templateFullPath);
   const thumbnailDir = path.join(templateDir, 'thumbnails');

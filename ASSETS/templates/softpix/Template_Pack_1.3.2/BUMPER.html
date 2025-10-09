@@ -212,9 +212,14 @@
                 container: document.getElementById("animation1"),
                 renderer: "svg",
                 loop: false,
-                autoplay: false,
+                autoplay: true,
                 animationData: lottieTemplateNew,
             })
+
+            animation.addEventListener('complete', () => {
+              document.body.setAttribute('data-spx-thumbnail-ready', 'true');
+            });
+
             let fonts = animation.renderer.data.fonts.list;
             for (const font in fonts) {
                 let family = fonts[font].fFamily
