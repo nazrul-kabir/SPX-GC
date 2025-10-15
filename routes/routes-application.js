@@ -239,13 +239,28 @@ router.post('/config', spxAuth.CheckLogin, async (req, res) => {
  
   try {
     async function saveAndReadConfig(){
+      // console.log("*** READING ***");
+      const currentConfig = await GetJsonData(datafile);
+      const updatedConfig = {
+        ...currentConfig,
+        ...ConfigData,
+        general: {
+          ...currentConfig.general,
+          ...ConfigData.general,
+        },
+      };
       // console.log('*** WRITING ***');
-      await spx.writeFile(datafile, ConfigData);
-      // console.log('*** READING ***');
+      await spx.writeFile(datafile, updatedConfig);
       await cfg.readConfig();
       // console.log('*** RENDERING ***');
-      res.render('view-appconfig', { recents: ConfigData.general.recents, layout: false, config: config, message:'Changes saved', user: req.session.user});
-  }; 
+      res.render("view-appconfig", {
+        recents: ConfigData.general.recents,
+        layout: false,
+        config: config,
+        message: "Changes saved",
+        user: req.session.user,
+      });
+    }; 
   // -----------------------------------------------------------------------------
   saveAndReadConfig(); // a nice solution 
   } catch (error) {
