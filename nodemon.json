@@ -1,0 +1,14 @@
+{
+  "watch": [
+    "server.js",
+    "routes/",
+    "utils/"
+  ],
+  "ext": "js,json",
+  "ignore": [
+    "node_modules/",
+    "ASSETS/",
+    "DATAROOT/"
+  ],
+  "exec": "node server.js"
+}
